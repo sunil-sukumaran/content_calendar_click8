@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Click 8 — June Content Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0D0F;
+    --surface: #141416;
+    --surface2: #1C1C20;
+    --surface3: #242428;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #F0EEE8;
+    --text2: #8A8880;
+    --text3: #555350;
+    --purple: #7B6FE8;
+    --purple-dim: rgba(123,111,232,0.12);
+    --purple-border: rgba(123,111,232,0.3);
+    --green: #3ECFA4;
+    --green-dim: rgba(62,207,164,0.1);
+    --green-border: rgba(62,207,164,0.3);
+    --coral: #F26D4F;
+    --coral-dim: rgba(242,109,79,0.1);
+    --blue: #4A9EF5;
+    --blue-dim: rgba(74,158,245,0.1);
+    --gold: #E8C547;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-xs: 5px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar-brand {
+    padding: 28px 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .brand-logo .dot {
+    width: 8px; height: 8px;
+    background: var(--purple);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .sidebar-section {
+    padding: 20px 12px 12px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0 8px;
+    margin-bottom: 8px;
+  }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--text2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    margin-bottom: 2px;
+  }
+
+  .nav-btn:hover { background: var(--surface2); color: var(--text); }
+
+  .nav-btn.active {
+    background: var(--purple-dim);
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  .nav-btn .nav-icon {
+    width: 28px; height: 28px;
+    border-radius: var(--radius-xs);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .nav-btn.active .nav-icon { background: rgba(123,111,232,0.15); }
+
+  .nav-count {
+    margin-left: auto;
+    font-size: 11px;
+    background: var(--surface3);
+    color: var(--text3);
+    padding: 1px 7px;
+    border-radius: 20px;
+  }
+
+  .nav-btn.active .nav-count {
+    background: rgba(123,111,232,0.2);
+    color: var(--purple);
+  }
+
+  .plat-toggle-section {
+    padding: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+
+  .plat-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 6px;
+  }
+
+  .plat-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .plat-btn.ig-on {
+    background: var(--purple-dim);
+    border-color: var(--purple-border);
+    color: #A89DF0;
+  }
+
+  .plat-btn.li-on {
+    background: var(--green-dim);
+    border-color: var(--green-border);
+    color: var(--green);
+  }
+
+  .toggle-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    margin-left: auto; flex-shrink: 0;
+    background: var(--text3);
+    transition: background 0.15s;
+  }
+
+  .plat-btn.ig-on .toggle-dot { background: var(--purple); }
+  .plat-btn.li-on .toggle-dot { background: var(--green); }
+
+  /* ── MAIN ── */
+  .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(13,13,15,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .topbar-left { display: flex; flex-direction: column; }
+
+  .topbar-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .topbar-sub { font-size: 12px; color: var(--text3); }
+
+  .topbar-stats {
+    display: flex;
+    gap: 6px;
+  }
+
+  .stat-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text2);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .stat-pill strong { color: var(--text); font-weight: 500; }
+
+  /* ── CONTENT AREA ── */
+  .content { padding: 24px 28px; flex: 1; }
+
+  /* ── ARC BANNER ── */
+  .arc-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+
+  .arc-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--purple);
+    line-height: 1;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .arc-info { flex: 1; }
+
+  .arc-week-label {
+    font-size: 10px;
+    color: var(--purple);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .arc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .arc-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 10px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .card:hover {
+    border-color: var(--border2);
+    transform: translateY(-1px);
+  }
+
+  .card.selected {
+    border-color: var(--purple);
+    border-width: 1.5px;
+  }
+
+  .card-accent {
+    height: 3px;
+    width: 100%;
+  }
+
+  .ig-accent { background: var(--purple); }
+  .li-accent { background: var(--green); }
+
+  .card-body { padding: 14px; }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .plat-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  .plat-badge svg { width: 12px; height: 12px; }
+
+  .ig-badge {
+    background: var(--purple-dim);
+    color: #A89DF0;
+    border: 1px solid var(--purple-border);
+  }
+
+  .li-badge {
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid var(--green-border);
+  }
+
+  .day-badge {
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .card-fmt {
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 4px;
+  }
+
+  .card-time {
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .card-footer {
+    background: var(--surface2);
+    padding: 8px 14px;
+    font-size: 11px;
+    color: var(--text3);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-kpi {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text2);
+  }
+
+  /* ── DETAIL PANEL ── */
+  .detail-wrap {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .detail-wrap.visible { display: block; }
+
+  .detail {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .detail-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .detail-plat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .detail-plat-badge svg { width: 14px; height: 14px; }
+
+  .detail-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .close-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    width: 32px; height: 32px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+
+  .close-btn:hover { background: var(--surface3); color: var(--text); }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .detail-cell {
+    background: var(--surface);
+    padding: 14px 20px;
+  }
+
+  .detail-cell-label {
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .detail-cell-val {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .detail-body { padding: 20px 24px; }
+
+  .section-label {
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .hook-box {
+    border-left: 2px solid var(--purple);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+    font-style: italic;
+    background: var(--purple-dim);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .text-box {
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  .tags-box {
+    font-size: 13px;
+    color: var(--purple);
+    margin-bottom: 16px;
+    line-height: 1.8;
+    opacity: 0.8;
+  }
+
+  .cta-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cta-arrow {
+    font-size: 16px;
+    color: var(--purple);
+    flex-shrink: 0;
+  }
+
+  .action-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .action-btn:hover {
+    background: var(--surface3);
+    color: var(--text);
+    border-color: var(--border2);
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text3);
+    grid-column: 1 / -1;
+  }
+
+  .empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.4; }
+
+  /* ── ARC COLORS PER WEEK ── */
+  .arc1 { color: var(--purple) !important; }
+  .arc2 { color: var(--green) !important; }
+  .arc3 { color: var(--coral) !important; }
+  .arc4 { color: var(--blue) !important; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .sidebar { width: 200px; }
+    .content { padding: 16px; }
+    .topbar { padding: 12px 16px; }
+    .topbar-stats { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .layout { flex-direction: column; }
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: static;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-section { display: flex; flex-wrap: wrap; gap: 4px; padding: 12px; }
+    .sidebar-label { display: none; }
+    .plat-toggle-section { display: flex; gap: 6px; padding: 12px; border-top: 1px solid var(--border); }
+    .plat-btn { margin-bottom: 0; }
+    .nav-btn { padding: 6px 10px; }
+    .detail-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card { animation: fadeIn 0.2s ease both; }
+  .detail { animation: fadeIn 0.2s ease both; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">
+        <span class="dot"></span>
+        Click 8
+      </div>
+      <div class="brand-sub">June 2025 · Content Calendar</div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Campaign arcs</div>
+      <button class="nav-btn active" onclick="setArc(0, this)">
+        <span class="nav-icon">◈</span>
+        All arcs
+        <span class="nav-count" id="count-0">28</span>
+      </button>
+      <button class="nav-btn" onclick="setArc(1, this)">
+        <span class="nav-icon arc1">①</span>
+        Identity crisis
+        <span class="nav-count" id="count-1">7</span>
+      </button>
+      <button class="nav-btn" onclick="setArc(2, this)">
+        <span class="nav-icon arc2">②</span>
+        Proof machine
+        <span class="nav-count" id="count-2">7</span>
+      </button>
+      <button class="nav-btn" onclick="setArc(3, this)">
+        <span class="nav-icon arc3">③</span>
+        Enemy arc
+        <span class="nav-count" id="count-3">7</span>
+      </button>
+      <button class="nav-btn" onclick="setArc(4, this)">
+        <span class="nav-icon arc4">④</span>
+        Cultural takeover
+        <span class="nav-count" id="count-4">7</span>
+      </button>
+    </div>
+
+    <div class="plat-toggle-section">
+      <div class="sidebar-label" style="padding:0;margin-bottom:10px">Platforms</div>
+      <button class="plat-btn ig-on" id="btn-ig" onclick="togglePlat('ig')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Instagram
+        <span class="toggle-dot"></span>
+      </button>
+      <button class="plat-btn li-on" id="btn-li" onclick="togglePlat('li')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5" stroke-linecap="round"/><path d="M11 17v-4c0-1.5 1-2.5 2.5-2.5S16 11.5 16 13v4"/></svg>
+        LinkedIn
+        <span class="toggle-dot"></span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title" id="topbar-title">June 2025 — Full Campaign</div>
+        <div class="topbar-sub">Instagram + LinkedIn · 4 narrative arcs · 30 days</div>
+      </div>
+      <div class="topbar-stats">
+        <div class="stat-pill"><strong id="visible-count">28</strong> posts</div>
+        <div class="stat-pill">June <strong>2025</strong></div>
+        <div class="stat-pill"><strong>2</strong> platforms</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="arc-banner" id="arc-banner">
+        <div class="arc-number" id="arc-num">01–04</div>
+        <div class="arc-info">
+          <div class="arc-week-label" id="arc-week">All weeks · June 2025</div>
+          <div class="arc-name" id="arc-name">Full 30-day campaign strategy</div>
+          <div class="arc-desc" id="arc-desc">Four sequential narrative arcs — each with a distinct psychological purpose that builds addiction, trust, authority, and cultural belonging in that exact order.</div>
+        </div>
+      </div>
+
+      <div class="grid" id="grid"></div>
+      <div class="detail-wrap" id="detail-wrap">
+        <div id="detail"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const IG_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`;
+const LI_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5" stroke-linecap="round"/><path d="M11 17v-4c0-1.5 1-2.5 2.5-2.5S16 11.5 16 13v4"/></svg>`;
+
+const ARCS = [
+  { num:"01–04", week:"All weeks · June 2025", name:"Full 30-day campaign strategy", desc:"Four sequential narrative arcs — each with a distinct psychological purpose that builds addiction, trust, authority, and cultural belonging in that exact order." },
+  { num:"01", week:"Week 1 · June 2–8", name:"Identity crisis arc", desc:"Make your audience question everything they thought they knew about marketing. Click 8 becomes the brand brave enough to say what no one else will." },
+  { num:"02", week:"Week 2 · June 9–15", name:"Proof machine arc", desc:"After creating intrigue, drop the receipts. Flood the feed with real data, case studies, and client transformations that convert followers to warm leads." },
+  { num:"03", week:"Week 3 · June 16–22", name:"Enemy arc", desc:"Name the villains of bad marketing — vanity metrics, bad advice, lazy agencies. Click 8 becomes the loudest truth-teller in the industry." },
+  { num:"04", week:"Week 4 · June 23–30", name:"Cultural takeover arc", desc:"Click 8 stops being an agency and becomes a cultural reference point. Challenges, live reveals, origin stories, and language-defining moments." },
+];
+
+const POSTS = [
+  // WEEK 1 — IDENTITY CRISIS ARC
+  { arc:1, day:2,  dayName:"Mon", month:"June", plat:"Instagram", fmt:"Carousel · 8 slides",       time:"9:00 AM",  title:"Your brand is lying to itself",                              hook:"If your logo is the first thing you think of when someone says 'brand', you've already lost. Here are 8 things your brand IS — none of them are a colour palette.",                                                                                hook2: "Swipe through each identity layer. Save this before your next campaign brief. Most brands skip slide 6 — that's exactly why they're invisible.",                                                    tags:"#BrandStrategy #Click8 #MarketingTruth #BrandIdentity #DigitalMarketing",   goal:"Saves + shares — position Click 8 as the brand that tells uncomfortable truths", kpi:"500+ saves · 200+ shares",       cta:"Save this post + follow for weekly brand breakdowns" },
+  { arc:1, day:2,  dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Long-form post",              time:"12:00 PM", title:"Why 97% of agency briefs fail before the client reads them",  hook:"I've seen briefs from Fortune 500 companies and one-person brands. The problem is never the budget. Here's the 8-point brief framework we use at Click 8 that changes everything from day one.",          hook2:"Drop a fire emoji if you want the framework as a free PDF. We'll send it to everyone who engages. This is what we usually charge for.",                                                             tags:"#MarketingAgency #BrandStrategy #ContentMarketing #Click8 #MarketingLeadership", goal:"Leads + authority — collect 200+ comments for DM follow-up",               kpi:"200+ comments · 50+ DM leads",  cta:"Comment your biggest brief challenge" },
+  { arc:1, day:4,  dayName:"Wed", month:"June", plat:"Instagram", fmt:"Reel · 60 seconds",          time:"6:00 PM",  title:"3 seconds to hook or die — we tested 200 reels",             hook:"You have 0.3 seconds. Not 3. We tested 200 reels and tracked exactly which opening frame stopped the scroll every single time. The pattern shocked us.",                                                    hook2:"Comment 'HOOK' and we'll send you the full cheat sheet. We've used this to get clients to 1M+ reach on a single post. It's yours for free.",                                                        tags:"#InstagramReels #ContentStrategy #Click8 #ViralMarketing #SocialMediaTips",  goal:"Reach + DMs — trigger 1000+ keyword comments for automation",              kpi:"1M+ reach · 500+ comments",     cta:"Comment 'HOOK' below" },
+  { arc:1, day:5,  dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Sunday letter",               time:"10:00 AM", title:"What we learned from losing a pitch this week",               hook:"We lost a pitch this week. We're sharing every detail — what we presented, where we went wrong, and the one question the client asked that we couldn't answer. Radical transparency.",                    hook2:"This industry needs more honesty. Share if you agree. The brands that win in 2025 are the ones brave enough to be human.",                                                                            tags:"#AgencyLife #MarketingHonesty #Click8 #RadicalTransparency #GrowthMindset",  goal:"Trust + virality — be the agency that's genuinely honest",                  kpi:"10K+ impressions · 300+ reactions", cta:"Share with someone who works in marketing" },
+  { arc:1, day:6,  dayName:"Fri", month:"June", plat:"Instagram", fmt:"Story series · 7 slides",    time:"3:00 PM",  title:"Day-in-the-life: Inside the Click 8 strategy room",           hook:"Behind the curtain. What a real strategy session looks like — the whiteboards, the arguments, the breakthroughs, and the moments where we nearly gave up on an idea. No filters.",                          hook2:"Tap through to see how we build campaigns that break the internet. Stories expire in 24 hours — watch now.",                                                                                          tags:"#BehindTheScenes #MarketingAgency #Click8 #AgencyLife #ContentCreation",     goal:"Authenticity + retention — 80% story completion rate",                      kpi:"80% completion · 200+ DM replies", cta:"DM 'STRATEGY' to join our next live session" },
+  { arc:1, day:7,  dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Poll + follow-up post",       time:"9:00 AM",  title:"What kills a brand faster? (24-hour poll)",                   hook:"I'm running a poll because I genuinely want to know what marketing professionals think. Our answer — based on working with 50+ brands — will surprise everyone who voted. Revealing in 24 hours.",          hook2:"Results + our full breakdown drops tomorrow. Vote now and tag someone who works in brand strategy.",                                                                                                   tags:"#BrandStrategy #MarketingPoll #Click8 #DigitalMarketing #BrandManagement",   goal:"Engagement + reach — LinkedIn polls get 3x organic reach",                  kpi:"2K+ votes · 500+ comments",     cta:"Vote and tag your marketing director" },
+  { arc:1, day:8,  dayName:"Sun", month:"June", plat:"Instagram", fmt:"Talking head reel · 45 sec", time:"9:00 AM",  title:"I audited 100 brand pages in 24 hours — the pattern",          hook:"I spent 24 hours auditing 100 brand pages on Instagram. 89 made the exact same mistake. Here's what separates the 11 that are actually growing — and it has nothing to do with budget.",                   hook2:"Follow for Part 2 dropping Tuesday. Comment your handle if you want to be audited live.",                                                                                                             tags:"#InstagramMarketing #BrandAudit #Click8 #SocialMediaStrategy #BrandGrowth",  goal:"Followers + views — Part 2 tease drives series engagement",                 kpi:"500K views · 2K new followers", cta:"Comment your Instagram handle for a live audit" },
+
+  // WEEK 2 — PROOF MACHINE ARC
+  { arc:2, day:9,  dayName:"Mon", month:"June", plat:"Instagram", fmt:"Before/After carousel · 10 slides", time:"9:00 AM",  title:"0 to 80K followers. 90 days. Every move revealed.",      hook:"Slide 1: the account before. Slides 2–9: the exact strategy, week by week. Slide 10: the final results. No gatekeeping. This is the full Click 8 playbook. Client approved every word.",                hook2:"Save this. Your future self will thank you. Exact posting cadence, content mix, and engagement tactics — no course needed.",                                                                          tags:"#InstagramGrowth #SocialMediaMarketing #Click8 #ContentStrategy #FollowerGrowth", goal:"Saves + new followers — case study content converts followers to clients", kpi:"5K saves · 3K new followers",   cta:"Save and DM 'GROWTH' for a free account audit" },
+  { arc:2, day:9,  dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Case study post",             time:"12:00 PM", title:"How a D2C startup got 10x ROI in 6 months — full breakdown",   hook:"Client name: confidential. Industry: direct-to-consumer. Budget: lean. Result: 10x return on every rupee. Full breakdown with screenshots, every strategy decision, and what nearly broke it in month 4.", hook2:"DM 'case study' and we'll send you the full PDF. Only sending to the first 100 people who message.",                                                                                                  tags:"#MarketingROI #CaseStudy #Click8 #D2CMarketing #DigitalStrategy",            goal:"Leads + authority — case study PDF creates lead magnet pipeline",           kpi:"500+ DMs · 50 qualified leads", cta:"DM 'case study' for the full PDF" },
+  { arc:2, day:11, dayName:"Wed", month:"June", plat:"Instagram", fmt:"Talking head reel · 30 sec", time:"6:00 PM",  title:"The metric everyone tracks that means nothing",               hook:"Stop celebrating your follower count. I'll tell you the ONE number that actually predicts revenue — and most brands have never even checked it in their analytics dashboard.",                                hook2:"Comment your follower count and engagement rate. We'll tell you exactly what it means for your brand's revenue potential. Free. Right here.",                                                         tags:"#SocialMediaMetrics #InstagramTips #Click8 #MarketingMetrics #EngagementRate", goal:"Comments + reach — data collection + community engagement",                kpi:"1K comments · 2M reach",        cta:"Comment your follower count + engagement rate" },
+  { arc:2, day:12, dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Controversial data post",     time:"10:00 AM", title:"Most social media managers are paid to be average",            hook:"Brands posting 7x/week with no strategy get 63% less engagement than brands posting 3x/week with a clear narrative arc. Yet most teams are measured on volume. This needs to change.",                     hook2:"Tag a marketing manager who needs to see this. What metric is YOUR team actually accountable for? The answers will either inspire or horrify you.",                                                    tags:"#SocialMediaManagement #ContentStrategy #Click8 #MarketingMetrics #CMO",     goal:"Shares + debate — controversial take drives organic distribution",          kpi:"5K shares · 1K comments",       cta:"Tag a marketing manager below" },
+  { arc:2, day:13, dayName:"Fri", month:"June", plat:"Instagram", fmt:"Results reveal reel · 45 sec", time:"9:00 AM", title:"Client said we were too expensive. We showed them this.",    hook:"Three months ago a client almost didn't sign because of budget. We did a performance deal instead. Here's exactly what happened — month by month, number by number.",                                       hook2:"The lesson: never let price be the final answer when the ROI case is this clear. DM us to discuss a performance deal for your brand.",                                                                 tags:"#ClientResults #MarketingROI #Click8 #AgencyResults #PerformanceMarketing",  goal:"Social proof + inbound DMs from warm leads",                               kpi:"500K views · 200+ DM inquiries", cta:"DM 'PERFORMANCE' to discuss results-based engagement" },
+  { arc:2, day:14, dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Data report long-form",       time:"8:00 AM",  title:"We analyzed 1,000 viral posts across 5 platforms",            hook:"90 days. 1,000 posts. Every one tracked for format, time, hook type, CTA, and topic. The pattern that emerged is something every marketer needs to see — and it contradicts what every guru teaches.",       hook2:"Save this post. The full report PDF goes to newsletter subscribers first. Subscribe link in comments.",                                                                                               tags:"#ContentMarketing #ViralContent #Click8 #SocialMediaData #ContentAnalysis",  goal:"Newsletter subscribers + authority positioning",                            kpi:"2K saves · 500 newsletter signups", cta:"Drop 'REPORT' to get the full PDF in your DMs" },
+  { arc:2, day:15, dayName:"Sun", month:"June", plat:"Instagram", fmt:"Screen recording reel · 60 sec", time:"7:00 PM", title:"Live analytics: real client dashboard, no hiding",         hook:"Sharing my screen right now. Real client. Real numbers. Real growth. Breaking down what's working, what we're cutting immediately, and the metric that changed everything in month 2.",                     hook2:"Comment the metric you want us to focus on next and we'll make a follow-up video. This series gets more specific every episode.",                                                                     tags:"#MarketingAnalytics #DataDriven #Click8 #SocialMediaAnalytics #MarketingData", goal:"Trust + series engagement — raw authenticity builds credibility",          kpi:"250K views · 500 comments",     cta:"Comment the metric you want broken down next" },
+
+  // WEEK 3 — ENEMY ARC
+  { arc:3, day:16, dayName:"Mon", month:"June", plat:"Instagram", fmt:"Expose carousel · 9 slides", time:"9:00 AM",  title:"7 'marketing trends' secretly killing your brand",             hook:"Everyone's doing these. Everyone's quietly losing because of them. We've watched 7 trends that sound brilliant destroy brand equity for clients who came to us after trying them.",                          hook2:"Tag the agency or guru who sold you one of these. No mercy. The marketing industry needs this conversation.",                                                                                          tags:"#MarketingMistakes #BrandStrategy #Click8 #MarketingTrends #BadMarketing",   goal:"Shares + viral reach — controversy drives exponential distribution",        kpi:"50K shares · 5M reach",         cta:"Tag someone who needs to see this right now" },
+  { arc:3, day:16, dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Hot take manifesto",          time:"3:00 PM",  title:"Vanity metrics are the cigarettes of marketing",              hook:"No one talks about how addictive vanity metrics are. Likes. Followers. Impressions. They feel incredible. They look amazing in board decks. They're also quietly killing your brand's survival.",            hook2:"Drop the metric you've personally stopped reporting and why. I'll respond to every single comment.",                                                                                                   tags:"#VanityMetrics #MarketingLeadership #Click8 #CMO #MarketingStrategy",        goal:"Engagement + authority — position Click 8 as truth-teller",                 kpi:"1K comments · 20K impressions", cta:"Drop your honest answer in the comments" },
+  { arc:3, day:18, dayName:"Wed", month:"June", plat:"Instagram", fmt:"Rant reel · 45 sec",         time:"6:00 PM",  title:"Stop posting for the algorithm. This is the intervention.",    hook:"If one more brand changes their entire content strategy because of a platform update I will lose it. Here's why chasing algorithms is the number one mistake — and what we do instead.",                    hook2:"Save this and send to every brand manager you know. Brands that chase algorithms always lose to brands that chase their audience.",                                                                    tags:"#InstagramAlgorithm #ContentStrategy #Click8 #SocialMediaStrategy #BrandMarketing", goal:"Saves + followers — relatable pain point drives strong saves",          kpi:"3K saves · 3K new followers",   cta:"Save and tag a brand manager who needs this" },
+  { arc:3, day:19, dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Agency manifesto",            time:"10:00 AM", title:"The Click 8 anti-agency manifesto — our public promise",       hook:"We hate retainers that don't deliver. We hate decks stuffed with jargon. We hate agencies that hide behind 'brand awareness' when results don't come. Here's our public promise — in writing.",             hook2:"Every agency should publish one of these. Share if you think the industry needs more accountability. Screenshot and hold us to it.",                                                                   tags:"#AgencyAccountability #MarketingManifesto #Click8 #MarketingAgency #TransparentMarketing", goal:"Brand positioning + earned media — manifestos get reshared",          kpi:"25K impressions · 2K shares",   cta:"Share if you believe agencies should be accountable" },
+  { arc:3, day:20, dayName:"Fri", month:"June", plat:"Instagram", fmt:"Controversial reel · 60 sec", time:"9:00 AM", title:"Most influencer partnerships are a scam — the math",          hook:"Showing you the actual ROI math on a typical influencer deal right now. You're going to be furious when you see the numbers. Then I'll show you what actually works with real client data.",                 hook2:"Tag a brand that needs this reality check. The truth hurts but it's free. A bad influencer deal costs tens of thousands.",                                                                             tags:"#InfluencerMarketing #MarketingROI #Click8 #InfluencerStrategy #ContentMarketing", goal:"Viral reach + DMs from brands burned by bad deals",                       kpi:"2M reach · 1K saves",           cta:"DM 'INFLUENCER' if you've been burned by a bad deal" },
+  { arc:3, day:21, dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Deep dive breakdown",         time:"8:00 AM",  title:"We tested every viral marketing strategy so you don't have to", hook:"We tested 14 viral strategies from the internet's top gurus. On real clients. With real money. Honest scoreboard — 4 that worked, 7 that wasted everyone's time, 3 we're still testing.",                 hook2:"This post will save you thousands and months of wasted effort. Share with every marketing manager you know.",                                                                                          tags:"#MarketingStrategy #ViralMarketing #Click8 #ContentStrategy #MarketingExperiments", goal:"Authority + shares — being the most honest voice in the room",           kpi:"30K impressions · 3K shares",   cta:"Tag a marketer who needs this before they waste another budget" },
+  { arc:3, day:22, dayName:"Sun", month:"June", plat:"Instagram", fmt:"Storytelling reel · 60 sec", time:"7:00 PM",  title:"The brief that made us say no — a $250K decision",            hook:"A massive brand sent us a brief with 47 objectives, zero budget flexibility, and a two-week deadline. We said no. Here's the conversation and what it taught us about every client since.",                 hook2:"Every agency should watch this. Saying no to the wrong client is the most powerful growth strategy there is.",                                                                                        tags:"#AgencyLife #ClientManagement #Click8 #BrandConsulting #MarketingAgency",    goal:"Trust + community — attracts right-fit clients, repels wrong ones",         kpi:"500K views · 1K shares",        cta:"Share this with every agency founder you know" },
+
+  // WEEK 4 — CULTURAL TAKEOVER ARC
+  { arc:4, day:23, dayName:"Mon", month:"June", plat:"Instagram", fmt:"Collab reveal reel · 90 sec", time:"9:00 AM", title:"We partnered with [surprise creator] — watch",                hook:"We don't do paid promotions. We do creative partnerships where both sides genuinely believe in the output. This one broke every benchmark we had in 48 hours.",                                             hook2:"Tag someone who needs to see this collab. Watch until the very end — the last 10 seconds is the announcement you've been waiting for.",                                                               tags:"#CreativeCollab #ContentCreation #Click8 #BrandPartnership #InstagramMarketing", goal:"New audience + viral hype — tap into partner's community",               kpi:"5M reach · 10K new followers", cta:"Tag someone and watch until the end" },
+  { arc:4, day:23, dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Thought leadership post",     time:"2:00 PM",  title:"The next 3 years of marketing: 8 shifts that define everything", hook:"6 months studying market signals, cultural shifts, and platform data. Here are 8 things that will define marketing between now and 2028. Click 8 is already building for all of them.",                   hook2:"Save this. Screenshot it. It's your strategic planning document for the next 36 months. I'll write a deeper dive on each shift — follow for every installment.",                                     tags:"#MarketingFuture #ContentStrategy #Click8 #MarketingTrends2028 #FutureOfMarketing", goal:"Authority + media coverage — thought leadership at scale gets press",     kpi:"50K impressions · 5K saves",   cta:"Save and follow for the deeper dives on each shift" },
+  { arc:4, day:25, dayName:"Wed", month:"June", plat:"Instagram", fmt:"Community post · interactive", time:"6:00 PM", title:"You choose our next real client campaign",                   hook:"We're handing creative control to our community. Vote on the next campaign concept we build — this is for a real client, with a real budget. Your vote shapes what actually gets made.",                   hook2:"Drop your vote and watch us build it live. We'll give credit to everyone who voted for the winning concept. You're part of this.",                                                                    tags:"#CommunityMarketing #Click8 #ContentCreation #BrandStrategy #MarketingCommunity", goal:"Community ownership + engagement — revolutionary participation model",    kpi:"10K votes · 2K comments",      cta:"Vote for your preferred concept in the comments" },
+  { arc:4, day:26, dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Open letter / op-ed",         time:"10:00 AM", title:"An open letter to every brand that gave up on social media",   hook:"You didn't fail at social media. Social media failed you. You were handed the wrong playbook by people selling courses. Here's what the brands that actually win are doing differently.",                   hook2:"Every CMO needs to read this. Tag yours. Brands that treat social as conversation — not broadcasting — win every time.",                                                                              tags:"#SocialMediaStrategy #CMO #Click8 #BrandMarketing #ContentMarketing",        goal:"Viral share + inbound from burned brands",                                  kpi:"100K impressions · 10K shares", cta:"Tag your CMO — this conversation needs to happen" },
+  { arc:4, day:27, dayName:"Fri", month:"June", plat:"Instagram", fmt:"Milestone reveal reel · 60 sec", time:"9:00 AM", title:"We crossed a milestone — naming everyone who made it happen", hook:"The number matters less than the people. A personal shoutout to every client, collaborator, and community member. If you've ever engaged with Click 8, you're part of this milestone.",                 hook2:"Comment 'WE DID THIS' if you've been here from the start. Screenshot and share.",                                                                                                                     tags:"#Click8Milestone #Gratitude #MarketingCommunity #Click8 #BrandGrowth",       goal:"Loyalty + reach — milestone content creates emotional connection",          kpi:"10K comments · 1M reach",       cta:"Comment 'WE DID THIS' if you've been part of the journey" },
+  { arc:4, day:28, dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Vision + brand statement",    time:"8:00 AM",  title:"The agency we're building isn't for everyone. By design.",    hook:"We've been asked why we turn down clients, publish our frameworks, and share our failures. Simple: we're not building the biggest agency in the world. We're building the most trusted one.",               hook2:"The mission matters more than the metrics. Share if you believe purpose-driven business is the only business worth building.",                                                                         tags:"#PurposeDrivenBusiness #MarketingAgency #Click8 #AgencyValues #BrandPurpose", goal:"Brand vision + organic resharing from aligned audience",                   kpi:"30K impressions · 5K shares",  cta:"Share with someone building something they believe in" },
+  { arc:4, day:29, dayName:"Sun", month:"June", plat:"Instagram", fmt:"Challenge launch reel · 45 sec", time:"7:00 PM", title:"The #Click8Challenge — prove your brand in 8 seconds",     hook:"Can you communicate your entire brand value in 8 seconds? No editing. No voiceover. No script. Just the raw truth of what your brand stands for. We're going first — right now.",                         hook2:"Stitch us with your 8 seconds. We're reposting every single entry on our stories. Tag a brand that should try this.",                                                                                 tags:"#Click8Challenge #BrandChallenge #InstagramChallenge #ContentChallenge #BrandIdentity", goal:"UGC + viral brand challenge — exponential reach through participation", kpi:"100K stitches · 500 brand entries", cta:"Record your 8 seconds and stitch with #Click8Challenge" },
+  { arc:4, day:30, dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Month retrospective post",    time:"10:00 AM", title:"30 days of radical transparency — every number, published",   hook:"One month ago we committed to the most transparent content strategy any marketing agency has ever published. Today we're sharing every number — what performed, what flopped, what surprised us.",           hook2:"This is the post we'll look back on as the month that changed Click 8 forever. Save it. Follow for month 2 — it escalates from here.",                                                               tags:"#ContentMarketing #MarketingTransparency #Click8 #ContentCalendar #AgencyLife", goal:"Content series closer + month 2 launch momentum",                         kpi:"40K impressions · 3K saves",   cta:"Save and follow for month 2 — it escalates from here" },
+];
+
+let activeArc = 0, showIG = true, showLI = true, selectedIdx = null, filteredCache = [];
+
+function setArc(n, btn) {
+  activeArc = n;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const d = ARCS[n];
+  document.getElementById('arc-num').textContent = d.num;
+  document.getElementById('arc-week').textContent = d.week;
+  document.getElementById('arc-name').textContent = d.name;
+  document.getElementById('arc-desc').textContent = d.desc;
+  document.getElementById('topbar-title').textContent = n === 0 ? 'June 2025 — Full Campaign' : d.name;
+  selectedIdx = null;
+  closeDetail();
+  render();
+}
+
+function togglePlat(p) {
+  if (p === 'ig') {
+    if (showIG && !showLI) return;
+    showIG = !showIG;
+    document.getElementById('btn-ig').classList.toggle('ig-on', showIG);
+  } else {
+    if (!showIG && showLI) return;
+    showLI = !showLI;
+    document.getElementById('btn-li').classList.toggle('li-on', showLI);
+  }
+  selectedIdx = null;
+  closeDetail();
+  render();
+}
+
+function render() {
+  const grid = document.getElementById('grid');
+  filteredCache = POSTS.filter(p => {
+    if (activeArc > 0 && p.arc !== activeArc) return false;
+    if (!showIG && p.plat === 'Instagram') return false;
+    if (!showLI && p.plat === 'LinkedIn') return false;
+    return true;
+  });
+
+  document.getElementById('visible-count').textContent = filteredCache.length;
+
+  if (!filteredCache.length) {
+    grid.innerHTML = `<div class="empty"><div class="empty-icon">◌</div><div>No posts match current filters</div></div>`;
+    return;
+  }
+
+  grid.innerHTML = filteredCache.map((p, i) => {
+    const isIG = p.plat === 'Instagram';
+    const delay = Math.min(i * 30, 300);
+    return `<div class="card${selectedIdx === i ? ' selected' : ''}" id="card-${i}" onclick="showDetail(${i})" style="animation-delay:${delay}ms">
+      <div class="card-accent ${isIG ? 'ig-accent' : 'li-accent'}"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="plat-badge ${isIG ? 'ig-badge' : 'li-badge'}">${isIG ? IG_SVG : LI_SVG} ${p.plat}</span>
+          <span class="day-badge">June ${p.day}</span>
+        </div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-fmt">${p.fmt}</div>
+        <div class="card-time">⏰ ${p.time}</div>
+      </div>
+      <div class="card-footer">
+        <span style="opacity:.5">↗</span>
+        <span class="card-kpi">${p.kpi}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showDetail(i) {
+  selectedIdx = i;
+  document.querySelectorAll('.card').forEach((c, idx) => c.classList.toggle('selected', idx === i));
+  const p = filteredCache[i];
+  const isIG = p.plat === 'Instagram';
+  const detWrap = document.getElementById('detail-wrap');
+  const det = document.getElementById('detail');
+  detWrap.classList.add('visible');
+  det.innerHTML = `<div class="detail">
+    <div class="detail-header">
+      <div>
+        <span class="detail-plat-badge ${isIG ? 'ig-badge' : 'li-badge'}">${isIG ? IG_SVG : LI_SVG} ${p.plat} · ${p.fmt}</span>
+        <div class="detail-title">${p.title}</div>
+      </div>
+      <button class="close-btn" onclick="closeDetail()" aria-label="Close">✕</button>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-cell"><div class="detail-cell-label">Date</div><div class="detail-cell-val">${p.dayName}, June ${p.day}, 2025</div></div>
+      <div class="detail-cell"><div class="detail-cell-label">Post time</div><div class="detail-cell-val">${p.time}</div></div>
+      <div class="detail-cell"><div class="detail-cell-label">Primary goal</div><div class="detail-cell-val">${p.goal}</div></div>
+      <div class="detail-cell"><div class="detail-cell-label">KPI target</div><div class="detail-cell-val">${p.kpi}</div></div>
+    </div>
+    <div class="detail-body">
+      <div class="section-label">Hook direction</div>
+      <div class="hook-box">${p.hook}</div>
+      <div class="section-label">Caption</div>
+      <div class="text-box">${p.hook2}</div>
+      <div class="section-label">Hashtags</div>
+      <div class="tags-box">${p.tags}</div>
+      <div class="section-label">Call to action</div>
+      <div class="cta-box"><span class="cta-arrow">→</span>${p.cta}</div>
+      <div class="action-row">
+        <button class="action-btn" onclick="copyPost(${i})">⎘ Copy brief</button>
+        <button class="action-btn" onclick="exportPost(${i})">↓ Export as text</button>
+      </div>
+    </div>
+  </div>`;
+  detWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeDetail() {
+  selectedIdx = null;
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  const dw = document.getElementById('detail-wrap');
+  dw.classList.remove('visible');
+}
+
+function copyPost(i) {
+  const p = filteredCache[i];
+  const text = `CLICK 8 — CONTENT BRIEF
+Platform: ${p.plat}
+Date: ${p.dayName}, June ${p.day}, 2025
+Time: ${p.time}
+Format: ${p.fmt}
+
+TITLE: ${p.title}
+
+HOOK:
+${p.hook}
+
+CAPTION:
+${p.hook2}
+
+HASHTAGS:
+${p.tags}
+
+GOAL: ${p.goal}
+KPI: ${p.kpi}
+CTA: ${p.cta}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.textContent = '⎘ Copy brief'; }, 2000);
+  });
+}
+
+function exportPost(i) {
+  const p = filteredCache[i];
+  const text = `CLICK 8 — CONTENT BRIEF\n\nPlatform: ${p.plat}\nDate: ${p.dayName}, June ${p.day}, 2025\nTime: ${p.time}\nFormat: ${p.fmt}\n\nTITLE: ${p.title}\n\nHOOK:\n${p.hook}\n\nCAPTION:\n${p.hook2}\n\nHASHTAGS:\n${p.tags}\n\nGOAL: ${p.goal}\nKPI: ${p.kpi}\nCTA: ${p.cta}`;
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Click8_June${p.day}_${p.plat}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+render();
+</script>
+</body>
+</html>
