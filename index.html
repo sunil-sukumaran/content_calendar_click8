@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Click 8 — June Content Calendar</title>
+<title>Click 8 — June 2025 Content Calendars</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
@@ -31,6 +31,9 @@
     --blue: #4A9EF5;
     --blue-dim: rgba(74,158,245,0.1);
     --gold: #E8C547;
+    --brown: #C4703A;
+    --brown-dim: rgba(196,112,58,0.12);
+    --brown-border: rgba(196,112,58,0.3);
     --radius: 12px;
     --radius-sm: 8px;
     --radius-xs: 5px;
@@ -48,13 +51,73 @@
     overflow-x: hidden;
   }
 
-  /* ── SCROLLBAR ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
 
+  /* ── CLIENT SWITCHER BAR ── */
+  .client-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .client-bar-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+
+  .client-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--text3);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .client-tab:hover { color: var(--text2); }
+
+  .client-tab.active-c8 {
+    color: var(--purple);
+    border-bottom-color: var(--purple);
+  }
+
+  .client-tab.active-cafe {
+    color: var(--brown);
+    border-bottom-color: var(--brown);
+  }
+
+  .client-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-c8 { background: var(--purple); }
+  .dot-cafe { background: var(--brown); }
+
   /* ── LAYOUT ── */
-  .layout { display: flex; min-height: 100vh; }
+  .layout { display: flex; min-height: calc(100vh - 49px); }
 
   /* ── SIDEBAR ── */
   .sidebar {
@@ -65,34 +128,31 @@
     display: flex;
     flex-direction: column;
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: 49px;
+    height: calc(100vh - 49px);
     overflow-y: auto;
   }
 
   .sidebar-brand {
-    padding: 28px 20px 24px;
+    padding: 24px 20px 20px;
     border-bottom: 1px solid var(--border);
   }
 
   .brand-logo {
     font-family: 'Syne', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     letter-spacing: -0.02em;
     color: var(--text);
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
-  .brand-logo .dot {
-    width: 8px; height: 8px;
-    background: var(--purple);
-    border-radius: 50%;
-    display: inline-block;
-  }
+  .brand-logo .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot-purple { background: var(--purple); }
+  .dot-brown  { background: var(--brown); }
 
   .brand-sub {
     font-size: 11px;
@@ -102,9 +162,7 @@
     font-weight: 500;
   }
 
-  .sidebar-section {
-    padding: 20px 12px 12px;
-  }
+  .sidebar-section { padding: 18px 12px 12px; }
 
   .sidebar-label {
     font-size: 10px;
@@ -135,12 +193,9 @@
   }
 
   .nav-btn:hover { background: var(--surface2); color: var(--text); }
-
-  .nav-btn.active {
-    background: var(--purple-dim);
-    color: var(--purple);
-    font-weight: 500;
-  }
+  .nav-btn.active { font-weight: 500; }
+  .nav-btn.active-c8 { background: var(--purple-dim); color: var(--purple); }
+  .nav-btn.active-cafe { background: var(--brown-dim); color: var(--brown); }
 
   .nav-btn .nav-icon {
     width: 28px; height: 28px;
@@ -150,7 +205,8 @@
     flex-shrink: 0;
   }
 
-  .nav-btn.active .nav-icon { background: rgba(123,111,232,0.15); }
+  .nav-btn.active-c8 .nav-icon { background: rgba(123,111,232,0.15); }
+  .nav-btn.active-cafe .nav-icon { background: rgba(196,112,58,0.15); }
 
   .nav-count {
     margin-left: auto;
@@ -161,10 +217,8 @@
     border-radius: 20px;
   }
 
-  .nav-btn.active .nav-count {
-    background: rgba(123,111,232,0.2);
-    color: var(--purple);
-  }
+  .nav-btn.active-c8 .nav-count { background: rgba(123,111,232,0.2); color: var(--purple); }
+  .nav-btn.active-cafe .nav-count { background: rgba(196,112,58,0.2); color: var(--brown); }
 
   .plat-toggle-section {
     padding: 12px;
@@ -191,17 +245,9 @@
 
   .plat-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-  .plat-btn.ig-on {
-    background: var(--purple-dim);
-    border-color: var(--purple-border);
-    color: #A89DF0;
-  }
-
-  .plat-btn.li-on {
-    background: var(--green-dim);
-    border-color: var(--green-border);
-    color: var(--green);
-  }
+  .plat-btn.ig-on { background: var(--purple-dim); border-color: var(--purple-border); color: #A89DF0; }
+  .plat-btn.li-on { background: var(--green-dim); border-color: var(--green-border); color: var(--green); }
+  .plat-btn.ga-on { background: var(--blue-dim); border-color: rgba(74,158,245,0.3); color: var(--blue); }
 
   .toggle-dot {
     width: 7px; height: 7px; border-radius: 50%;
@@ -212,6 +258,7 @@
 
   .plat-btn.ig-on .toggle-dot { background: var(--purple); }
   .plat-btn.li-on .toggle-dot { background: var(--green); }
+  .plat-btn.ga-on .toggle-dot { background: var(--blue); }
 
   /* ── MAIN ── */
   .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
@@ -219,13 +266,13 @@
   /* ── TOPBAR ── */
   .topbar {
     position: sticky;
-    top: 0;
+    top: 49px;
     z-index: 10;
-    background: rgba(13,13,15,0.85);
+    background: rgba(13,13,15,0.9);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    padding: 16px 28px;
+    padding: 14px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -236,7 +283,7 @@
 
   .topbar-title {
     font-family: 'Syne', sans-serif;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     color: var(--text);
     letter-spacing: -0.02em;
@@ -244,10 +291,7 @@
 
   .topbar-sub { font-size: 12px; color: var(--text3); }
 
-  .topbar-stats {
-    display: flex;
-    gap: 6px;
-  }
+  .topbar-stats { display: flex; gap: 6px; }
 
   .stat-pill {
     background: var(--surface2);
@@ -263,7 +307,7 @@
 
   .stat-pill strong { color: var(--text); font-weight: 500; }
 
-  /* ── CONTENT AREA ── */
+  /* ── CONTENT ── */
   .content { padding: 24px 28px; flex: 1; }
 
   /* ── ARC BANNER ── */
@@ -276,29 +320,32 @@
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    transition: all 0.2s;
   }
 
   .arc-number {
     font-family: 'Syne', sans-serif;
     font-size: 36px;
     font-weight: 800;
-    color: var(--purple);
     line-height: 1;
     flex-shrink: 0;
     opacity: 0.5;
   }
 
+  .arc-number.c8 { color: var(--purple); }
+  .arc-number.cafe { color: var(--brown); }
+
   .arc-info { flex: 1; }
 
   .arc-week-label {
     font-size: 10px;
-    color: var(--purple);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 500;
     margin-bottom: 4px;
   }
+
+  .arc-week-label.c8 { color: var(--purple); }
+  .arc-week-label.cafe { color: var(--brown); }
 
   .arc-name {
     font-family: 'Syne', sans-serif;
@@ -312,11 +359,7 @@
   .arc-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
 
   /* ── GRID ── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 10px;
-  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 10px; }
 
   /* ── CARD ── */
   .card {
@@ -326,108 +369,57 @@
     overflow: hidden;
     cursor: pointer;
     transition: border-color 0.15s, transform 0.15s;
+    animation: fadeIn 0.2s ease both;
   }
 
-  .card:hover {
-    border-color: var(--border2);
-    transform: translateY(-1px);
-  }
+  .card:hover { border-color: var(--border2); transform: translateY(-1px); }
+  .card.selected-c8 { border-color: var(--purple); border-width: 1.5px; }
+  .card.selected-cafe { border-color: var(--brown); border-width: 1.5px; }
 
-  .card.selected {
-    border-color: var(--purple);
-    border-width: 1.5px;
-  }
-
-  .card-accent {
-    height: 3px;
-    width: 100%;
-  }
-
+  .card-accent { height: 3px; width: 100%; }
   .ig-accent { background: var(--purple); }
   .li-accent { background: var(--green); }
+  .ga-accent { background: var(--blue); }
 
   .card-body { padding: 14px; }
 
-  .card-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
+  .card-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 
   .plat-badge {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 9px;
-    border-radius: 20px;
+    display: flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 500;
+    padding: 3px 9px; border-radius: 20px;
   }
 
   .plat-badge svg { width: 12px; height: 12px; }
 
-  .ig-badge {
-    background: var(--purple-dim);
-    color: #A89DF0;
-    border: 1px solid var(--purple-border);
-  }
+  .ig-badge { background: var(--purple-dim); color: #A89DF0; border: 1px solid var(--purple-border); }
+  .li-badge { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+  .ga-badge { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(74,158,245,0.3); }
 
-  .li-badge {
-    background: var(--green-dim);
-    color: var(--green);
-    border: 1px solid var(--green-border);
-  }
-
-  .day-badge {
-    font-size: 11px;
-    color: var(--text3);
-  }
+  .day-badge { font-size: 11px; color: var(--text3); }
 
   .card-title {
     font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.35;
-    margin-bottom: 6px;
-    letter-spacing: -0.01em;
+    font-size: 13px; font-weight: 600;
+    color: var(--text); line-height: 1.35;
+    margin-bottom: 6px; letter-spacing: -0.01em;
   }
 
-  .card-fmt {
-    font-size: 12px;
-    color: var(--text3);
-    margin-bottom: 4px;
-  }
-
-  .card-time {
-    font-size: 12px;
-    color: var(--text3);
-  }
+  .card-fmt { font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+  .card-time { font-size: 12px; color: var(--text3); }
 
   .card-footer {
     background: var(--surface2);
-    padding: 8px 14px;
-    font-size: 11px;
-    color: var(--text3);
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    padding: 8px 14px; font-size: 11px; color: var(--text3);
+    display: flex; align-items: center; gap: 5px;
     border-top: 1px solid var(--border);
   }
 
-  .card-kpi {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text2);
-  }
+  .card-kpi { font-size: 11px; font-weight: 500; color: var(--text2); }
 
-  /* ── DETAIL PANEL ── */
-  .detail-wrap {
-    margin-top: 16px;
-    display: none;
-  }
-
+  /* ── DETAIL ── */
+  .detail-wrap { margin-top: 16px; display: none; }
   .detail-wrap.visible { display: block; }
 
   .detail {
@@ -435,185 +427,129 @@
     border: 1px solid var(--border2);
     border-radius: var(--radius);
     overflow: hidden;
+    animation: fadeIn 0.2s ease both;
   }
 
   .detail-header {
     padding: 20px 24px 16px;
     border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 16px;
   }
 
   .detail-plat-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 500;
+    padding: 4px 10px; border-radius: 20px; margin-bottom: 10px;
   }
 
   .detail-plat-badge svg { width: 14px; height: 14px; }
 
   .detail-title {
     font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    font-size: 20px; font-weight: 700;
+    color: var(--text); line-height: 1.25; letter-spacing: -0.02em;
   }
 
   .close-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text2);
-    width: 32px; height: 32px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text2); width: 32px; height: 32px;
+    border-radius: var(--radius-sm); cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-    transition: all 0.15s;
+    font-size: 16px; flex-shrink: 0; transition: all 0.15s;
   }
 
   .close-btn:hover { background: var(--surface3); color: var(--text); }
 
   .detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
     border-bottom: 1px solid var(--border);
   }
 
-  .detail-cell {
-    background: var(--surface);
-    padding: 14px 20px;
-  }
+  .detail-cell { background: var(--surface); padding: 14px 20px; }
 
   .detail-cell-label {
-    font-size: 10px;
-    color: var(--text3);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 4px;
+    font-size: 10px; color: var(--text3);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 500; margin-bottom: 4px;
   }
 
-  .detail-cell-val {
-    font-size: 13px;
-    color: var(--text);
-    font-weight: 500;
-  }
+  .detail-cell-val { font-size: 13px; color: var(--text); font-weight: 500; }
 
   .detail-body { padding: 20px 24px; }
 
   .section-label {
-    font-size: 10px;
-    color: var(--text3);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 8px;
+    font-size: 10px; color: var(--text3);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; margin-bottom: 8px;
   }
 
   .hook-box {
     border-left: 2px solid var(--purple);
-    padding: 12px 16px;
-    margin-bottom: 16px;
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.7;
-    font-style: italic;
+    padding: 12px 16px; margin-bottom: 16px;
+    font-size: 14px; color: var(--text2);
+    line-height: 1.7; font-style: italic;
     background: var(--purple-dim);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   }
 
-  .text-box {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.7;
+  .hook-box.cafe-hook {
+    border-left-color: var(--brown);
+    background: var(--brown-dim);
   }
 
-  .tags-box {
-    font-size: 13px;
-    color: var(--purple);
-    margin-bottom: 16px;
-    line-height: 1.8;
-    opacity: 0.8;
+  .text-box {
+    background: var(--surface2); border-radius: var(--radius-sm);
+    padding: 12px 16px; margin-bottom: 16px;
+    font-size: 13px; color: var(--text2); line-height: 1.7;
   }
+
+  .ga-spec-box {
+    background: var(--blue-dim);
+    border: 1px solid rgba(74,158,245,0.2);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px; margin-bottom: 16px;
+    font-size: 13px; color: var(--blue); line-height: 1.7;
+  }
+
+  .tags-box { font-size: 13px; color: var(--purple); margin-bottom: 16px; line-height: 1.8; opacity: 0.8; }
 
   .cta-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    font-size: 13px;
-    color: var(--text);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 20px;
+    font-size: 13px; color: var(--text); font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
   }
 
-  .cta-arrow {
-    font-size: 16px;
-    color: var(--purple);
-    flex-shrink: 0;
-  }
+  .cta-arrow { font-size: 16px; color: var(--purple); flex-shrink: 0; }
+  .cta-arrow.cafe { color: var(--brown); }
 
-  .action-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+  .action-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
   .action-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    color: var(--text2);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    padding: 8px 14px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border2);
+    color: var(--text2); font-family: 'DM Sans', sans-serif;
+    font-size: 12px; padding: 8px 14px;
+    border-radius: var(--radius-sm); cursor: pointer;
+    transition: all 0.15s; display: flex; align-items: center; gap: 6px;
   }
 
-  .action-btn:hover {
-    background: var(--surface3);
-    color: var(--text);
-    border-color: var(--border2);
-  }
+  .action-btn:hover { background: var(--surface3); color: var(--text); }
 
-  /* ── EMPTY STATE ── */
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text3);
-    grid-column: 1 / -1;
-  }
-
+  /* ── EMPTY ── */
+  .empty { text-align: center; padding: 60px 20px; color: var(--text3); grid-column: 1 / -1; }
   .empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.4; }
 
-  /* ── ARC COLORS PER WEEK ── */
+  /* ── ARC COLOR ACCENTS ── */
   .arc1 { color: var(--purple) !important; }
   .arc2 { color: var(--green) !important; }
   .arc3 { color: var(--coral) !important; }
   .arc4 { color: var(--blue) !important; }
+  .cafe-arc1 { color: #C4703A !important; }
+  .cafe-arc2 { color: var(--green) !important; }
+  .cafe-arc3 { color: var(--coral) !important; }
+  .cafe-arc4 { color: var(--gold) !important; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
@@ -625,86 +561,52 @@
 
   @media (max-width: 640px) {
     .layout { flex-direction: column; }
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: static;
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-    }
+    .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
     .sidebar-section { display: flex; flex-wrap: wrap; gap: 4px; padding: 12px; }
     .sidebar-label { display: none; }
-    .plat-toggle-section { display: flex; gap: 6px; padding: 12px; border-top: 1px solid var(--border); }
-    .plat-btn { margin-bottom: 0; }
+    .plat-toggle-section { display: flex; gap: 6px; padding: 12px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .plat-btn { margin-bottom: 0; width: auto; }
     .nav-btn { padding: 6px 10px; }
     .detail-grid { grid-template-columns: 1fr; }
+    .client-bar { padding: 0 16px; }
   }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .card { animation: fadeIn 0.2s ease both; }
-  .detail { animation: fadeIn 0.2s ease both; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 
+<!-- CLIENT SWITCHER -->
+<div class="client-bar">
+  <span class="client-bar-label">Client</span>
+  <button class="client-tab active-c8" id="tab-c8" onclick="switchClient('c8')">
+    <span class="client-dot dot-c8"></span>
+    Click 8
+  </button>
+  <button class="client-tab" id="tab-cafe" onclick="switchClient('cafe')">
+    <span class="client-dot dot-cafe"></span>
+    Café La Mirajh
+  </button>
+</div>
+
 <div class="layout">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-      <div class="brand-logo">
-        <span class="dot"></span>
+      <div class="brand-logo" id="brand-logo">
+        <span class="dot dot-purple"></span>
         Click 8
       </div>
-      <div class="brand-sub">June 2025 · Content Calendar</div>
+      <div class="brand-sub" id="brand-sub">June 2025 · Content Calendar</div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">Campaign arcs</div>
-      <button class="nav-btn active" onclick="setArc(0, this)">
-        <span class="nav-icon">◈</span>
-        All arcs
-        <span class="nav-count" id="count-0">28</span>
-      </button>
-      <button class="nav-btn" onclick="setArc(1, this)">
-        <span class="nav-icon arc1">①</span>
-        Identity crisis
-        <span class="nav-count" id="count-1">7</span>
-      </button>
-      <button class="nav-btn" onclick="setArc(2, this)">
-        <span class="nav-icon arc2">②</span>
-        Proof machine
-        <span class="nav-count" id="count-2">7</span>
-      </button>
-      <button class="nav-btn" onclick="setArc(3, this)">
-        <span class="nav-icon arc3">③</span>
-        Enemy arc
-        <span class="nav-count" id="count-3">7</span>
-      </button>
-      <button class="nav-btn" onclick="setArc(4, this)">
-        <span class="nav-icon arc4">④</span>
-        Cultural takeover
-        <span class="nav-count" id="count-4">7</span>
-      </button>
+    <div class="sidebar-section" id="sidebar-section">
+      <!-- Rendered by JS -->
     </div>
 
-    <div class="plat-toggle-section">
-      <div class="sidebar-label" style="padding:0;margin-bottom:10px">Platforms</div>
-      <button class="plat-btn ig-on" id="btn-ig" onclick="togglePlat('ig')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        Instagram
-        <span class="toggle-dot"></span>
-      </button>
-      <button class="plat-btn li-on" id="btn-li" onclick="togglePlat('li')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5" stroke-linecap="round"/><path d="M11 17v-4c0-1.5 1-2.5 2.5-2.5S16 11.5 16 13v4"/></svg>
-        LinkedIn
-        <span class="toggle-dot"></span>
-      </button>
+    <div class="plat-toggle-section" id="plat-toggle-section">
+      <!-- Rendered by JS -->
     </div>
   </aside>
 
@@ -713,20 +615,20 @@
     <div class="topbar">
       <div class="topbar-left">
         <div class="topbar-title" id="topbar-title">June 2025 — Full Campaign</div>
-        <div class="topbar-sub">Instagram + LinkedIn · 4 narrative arcs · 30 days</div>
+        <div class="topbar-sub" id="topbar-sub">Instagram + LinkedIn · 4 narrative arcs · 30 days</div>
       </div>
       <div class="topbar-stats">
         <div class="stat-pill"><strong id="visible-count">28</strong> posts</div>
         <div class="stat-pill">June <strong>2025</strong></div>
-        <div class="stat-pill"><strong>2</strong> platforms</div>
+        <div class="stat-pill" id="plat-pill"><strong>2</strong> platforms</div>
       </div>
     </div>
 
     <div class="content">
       <div class="arc-banner" id="arc-banner">
-        <div class="arc-number" id="arc-num">01–04</div>
+        <div class="arc-number c8" id="arc-num">01–04</div>
         <div class="arc-info">
-          <div class="arc-week-label" id="arc-week">All weeks · June 2025</div>
+          <div class="arc-week-label c8" id="arc-week">All weeks · June 2025</div>
           <div class="arc-name" id="arc-name">Full 30-day campaign strategy</div>
           <div class="arc-desc" id="arc-desc">Four sequential narrative arcs — each with a distinct psychological purpose that builds addiction, trust, authority, and cultural belonging in that exact order.</div>
         </div>
@@ -743,8 +645,12 @@
 <script>
 const IG_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`;
 const LI_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5" stroke-linecap="round"/><path d="M11 17v-4c0-1.5 1-2.5 2.5-2.5S16 11.5 16 13v4"/></svg>`;
+const GA_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/><line x1="3" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/></svg>`;
 
-const ARCS = [
+/* ─────────────────────────────────────────
+   CLICK 8 DATA
+───────────────────────────────────────── */
+const C8_ARCS = [
   { num:"01–04", week:"All weeks · June 2025", name:"Full 30-day campaign strategy", desc:"Four sequential narrative arcs — each with a distinct psychological purpose that builds addiction, trust, authority, and cultural belonging in that exact order." },
   { num:"01", week:"Week 1 · June 2–8", name:"Identity crisis arc", desc:"Make your audience question everything they thought they knew about marketing. Click 8 becomes the brand brave enough to say what no one else will." },
   { num:"02", week:"Week 2 · June 9–15", name:"Proof machine arc", desc:"After creating intrigue, drop the receipts. Flood the feed with real data, case studies, and client transformations that convert followers to warm leads." },
@@ -752,71 +658,220 @@ const ARCS = [
   { num:"04", week:"Week 4 · June 23–30", name:"Cultural takeover arc", desc:"Click 8 stops being an agency and becomes a cultural reference point. Challenges, live reveals, origin stories, and language-defining moments." },
 ];
 
-const POSTS = [
-  // WEEK 1 — IDENTITY CRISIS ARC
-  { arc:1, day:2,  dayName:"Mon", month:"June", plat:"Instagram", fmt:"Carousel · 8 slides",       time:"9:00 AM",  title:"Your brand is lying to itself",                              hook:"If your logo is the first thing you think of when someone says 'brand', you've already lost. Here are 8 things your brand IS — none of them are a colour palette.",                                                                                hook2: "Swipe through each identity layer. Save this before your next campaign brief. Most brands skip slide 6 — that's exactly why they're invisible.",                                                    tags:"#BrandStrategy #Click8 #MarketingTruth #BrandIdentity #DigitalMarketing",   goal:"Saves + shares — position Click 8 as the brand that tells uncomfortable truths", kpi:"500+ saves · 200+ shares",       cta:"Save this post + follow for weekly brand breakdowns" },
-  { arc:1, day:2,  dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Long-form post",              time:"12:00 PM", title:"Why 97% of agency briefs fail before the client reads them",  hook:"I've seen briefs from Fortune 500 companies and one-person brands. The problem is never the budget. Here's the 8-point brief framework we use at Click 8 that changes everything from day one.",          hook2:"Drop a fire emoji if you want the framework as a free PDF. We'll send it to everyone who engages. This is what we usually charge for.",                                                             tags:"#MarketingAgency #BrandStrategy #ContentMarketing #Click8 #MarketingLeadership", goal:"Leads + authority — collect 200+ comments for DM follow-up",               kpi:"200+ comments · 50+ DM leads",  cta:"Comment your biggest brief challenge" },
-  { arc:1, day:4,  dayName:"Wed", month:"June", plat:"Instagram", fmt:"Reel · 60 seconds",          time:"6:00 PM",  title:"3 seconds to hook or die — we tested 200 reels",             hook:"You have 0.3 seconds. Not 3. We tested 200 reels and tracked exactly which opening frame stopped the scroll every single time. The pattern shocked us.",                                                    hook2:"Comment 'HOOK' and we'll send you the full cheat sheet. We've used this to get clients to 1M+ reach on a single post. It's yours for free.",                                                        tags:"#InstagramReels #ContentStrategy #Click8 #ViralMarketing #SocialMediaTips",  goal:"Reach + DMs — trigger 1000+ keyword comments for automation",              kpi:"1M+ reach · 500+ comments",     cta:"Comment 'HOOK' below" },
-  { arc:1, day:5,  dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Sunday letter",               time:"10:00 AM", title:"What we learned from losing a pitch this week",               hook:"We lost a pitch this week. We're sharing every detail — what we presented, where we went wrong, and the one question the client asked that we couldn't answer. Radical transparency.",                    hook2:"This industry needs more honesty. Share if you agree. The brands that win in 2025 are the ones brave enough to be human.",                                                                            tags:"#AgencyLife #MarketingHonesty #Click8 #RadicalTransparency #GrowthMindset",  goal:"Trust + virality — be the agency that's genuinely honest",                  kpi:"10K+ impressions · 300+ reactions", cta:"Share with someone who works in marketing" },
-  { arc:1, day:6,  dayName:"Fri", month:"June", plat:"Instagram", fmt:"Story series · 7 slides",    time:"3:00 PM",  title:"Day-in-the-life: Inside the Click 8 strategy room",           hook:"Behind the curtain. What a real strategy session looks like — the whiteboards, the arguments, the breakthroughs, and the moments where we nearly gave up on an idea. No filters.",                          hook2:"Tap through to see how we build campaigns that break the internet. Stories expire in 24 hours — watch now.",                                                                                          tags:"#BehindTheScenes #MarketingAgency #Click8 #AgencyLife #ContentCreation",     goal:"Authenticity + retention — 80% story completion rate",                      kpi:"80% completion · 200+ DM replies", cta:"DM 'STRATEGY' to join our next live session" },
-  { arc:1, day:7,  dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Poll + follow-up post",       time:"9:00 AM",  title:"What kills a brand faster? (24-hour poll)",                   hook:"I'm running a poll because I genuinely want to know what marketing professionals think. Our answer — based on working with 50+ brands — will surprise everyone who voted. Revealing in 24 hours.",          hook2:"Results + our full breakdown drops tomorrow. Vote now and tag someone who works in brand strategy.",                                                                                                   tags:"#BrandStrategy #MarketingPoll #Click8 #DigitalMarketing #BrandManagement",   goal:"Engagement + reach — LinkedIn polls get 3x organic reach",                  kpi:"2K+ votes · 500+ comments",     cta:"Vote and tag your marketing director" },
-  { arc:1, day:8,  dayName:"Sun", month:"June", plat:"Instagram", fmt:"Talking head reel · 45 sec", time:"9:00 AM",  title:"I audited 100 brand pages in 24 hours — the pattern",          hook:"I spent 24 hours auditing 100 brand pages on Instagram. 89 made the exact same mistake. Here's what separates the 11 that are actually growing — and it has nothing to do with budget.",                   hook2:"Follow for Part 2 dropping Tuesday. Comment your handle if you want to be audited live.",                                                                                                             tags:"#InstagramMarketing #BrandAudit #Click8 #SocialMediaStrategy #BrandGrowth",  goal:"Followers + views — Part 2 tease drives series engagement",                 kpi:"500K views · 2K new followers", cta:"Comment your Instagram handle for a live audit" },
-
-  // WEEK 2 — PROOF MACHINE ARC
-  { arc:2, day:9,  dayName:"Mon", month:"June", plat:"Instagram", fmt:"Before/After carousel · 10 slides", time:"9:00 AM",  title:"0 to 80K followers. 90 days. Every move revealed.",      hook:"Slide 1: the account before. Slides 2–9: the exact strategy, week by week. Slide 10: the final results. No gatekeeping. This is the full Click 8 playbook. Client approved every word.",                hook2:"Save this. Your future self will thank you. Exact posting cadence, content mix, and engagement tactics — no course needed.",                                                                          tags:"#InstagramGrowth #SocialMediaMarketing #Click8 #ContentStrategy #FollowerGrowth", goal:"Saves + new followers — case study content converts followers to clients", kpi:"5K saves · 3K new followers",   cta:"Save and DM 'GROWTH' for a free account audit" },
-  { arc:2, day:9,  dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Case study post",             time:"12:00 PM", title:"How a D2C startup got 10x ROI in 6 months — full breakdown",   hook:"Client name: confidential. Industry: direct-to-consumer. Budget: lean. Result: 10x return on every rupee. Full breakdown with screenshots, every strategy decision, and what nearly broke it in month 4.", hook2:"DM 'case study' and we'll send you the full PDF. Only sending to the first 100 people who message.",                                                                                                  tags:"#MarketingROI #CaseStudy #Click8 #D2CMarketing #DigitalStrategy",            goal:"Leads + authority — case study PDF creates lead magnet pipeline",           kpi:"500+ DMs · 50 qualified leads", cta:"DM 'case study' for the full PDF" },
-  { arc:2, day:11, dayName:"Wed", month:"June", plat:"Instagram", fmt:"Talking head reel · 30 sec", time:"6:00 PM",  title:"The metric everyone tracks that means nothing",               hook:"Stop celebrating your follower count. I'll tell you the ONE number that actually predicts revenue — and most brands have never even checked it in their analytics dashboard.",                                hook2:"Comment your follower count and engagement rate. We'll tell you exactly what it means for your brand's revenue potential. Free. Right here.",                                                         tags:"#SocialMediaMetrics #InstagramTips #Click8 #MarketingMetrics #EngagementRate", goal:"Comments + reach — data collection + community engagement",                kpi:"1K comments · 2M reach",        cta:"Comment your follower count + engagement rate" },
-  { arc:2, day:12, dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Controversial data post",     time:"10:00 AM", title:"Most social media managers are paid to be average",            hook:"Brands posting 7x/week with no strategy get 63% less engagement than brands posting 3x/week with a clear narrative arc. Yet most teams are measured on volume. This needs to change.",                     hook2:"Tag a marketing manager who needs to see this. What metric is YOUR team actually accountable for? The answers will either inspire or horrify you.",                                                    tags:"#SocialMediaManagement #ContentStrategy #Click8 #MarketingMetrics #CMO",     goal:"Shares + debate — controversial take drives organic distribution",          kpi:"5K shares · 1K comments",       cta:"Tag a marketing manager below" },
-  { arc:2, day:13, dayName:"Fri", month:"June", plat:"Instagram", fmt:"Results reveal reel · 45 sec", time:"9:00 AM", title:"Client said we were too expensive. We showed them this.",    hook:"Three months ago a client almost didn't sign because of budget. We did a performance deal instead. Here's exactly what happened — month by month, number by number.",                                       hook2:"The lesson: never let price be the final answer when the ROI case is this clear. DM us to discuss a performance deal for your brand.",                                                                 tags:"#ClientResults #MarketingROI #Click8 #AgencyResults #PerformanceMarketing",  goal:"Social proof + inbound DMs from warm leads",                               kpi:"500K views · 200+ DM inquiries", cta:"DM 'PERFORMANCE' to discuss results-based engagement" },
-  { arc:2, day:14, dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Data report long-form",       time:"8:00 AM",  title:"We analyzed 1,000 viral posts across 5 platforms",            hook:"90 days. 1,000 posts. Every one tracked for format, time, hook type, CTA, and topic. The pattern that emerged is something every marketer needs to see — and it contradicts what every guru teaches.",       hook2:"Save this post. The full report PDF goes to newsletter subscribers first. Subscribe link in comments.",                                                                                               tags:"#ContentMarketing #ViralContent #Click8 #SocialMediaData #ContentAnalysis",  goal:"Newsletter subscribers + authority positioning",                            kpi:"2K saves · 500 newsletter signups", cta:"Drop 'REPORT' to get the full PDF in your DMs" },
-  { arc:2, day:15, dayName:"Sun", month:"June", plat:"Instagram", fmt:"Screen recording reel · 60 sec", time:"7:00 PM", title:"Live analytics: real client dashboard, no hiding",         hook:"Sharing my screen right now. Real client. Real numbers. Real growth. Breaking down what's working, what we're cutting immediately, and the metric that changed everything in month 2.",                     hook2:"Comment the metric you want us to focus on next and we'll make a follow-up video. This series gets more specific every episode.",                                                                     tags:"#MarketingAnalytics #DataDriven #Click8 #SocialMediaAnalytics #MarketingData", goal:"Trust + series engagement — raw authenticity builds credibility",          kpi:"250K views · 500 comments",     cta:"Comment the metric you want broken down next" },
-
-  // WEEK 3 — ENEMY ARC
-  { arc:3, day:16, dayName:"Mon", month:"June", plat:"Instagram", fmt:"Expose carousel · 9 slides", time:"9:00 AM",  title:"7 'marketing trends' secretly killing your brand",             hook:"Everyone's doing these. Everyone's quietly losing because of them. We've watched 7 trends that sound brilliant destroy brand equity for clients who came to us after trying them.",                          hook2:"Tag the agency or guru who sold you one of these. No mercy. The marketing industry needs this conversation.",                                                                                          tags:"#MarketingMistakes #BrandStrategy #Click8 #MarketingTrends #BadMarketing",   goal:"Shares + viral reach — controversy drives exponential distribution",        kpi:"50K shares · 5M reach",         cta:"Tag someone who needs to see this right now" },
-  { arc:3, day:16, dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Hot take manifesto",          time:"3:00 PM",  title:"Vanity metrics are the cigarettes of marketing",              hook:"No one talks about how addictive vanity metrics are. Likes. Followers. Impressions. They feel incredible. They look amazing in board decks. They're also quietly killing your brand's survival.",            hook2:"Drop the metric you've personally stopped reporting and why. I'll respond to every single comment.",                                                                                                   tags:"#VanityMetrics #MarketingLeadership #Click8 #CMO #MarketingStrategy",        goal:"Engagement + authority — position Click 8 as truth-teller",                 kpi:"1K comments · 20K impressions", cta:"Drop your honest answer in the comments" },
-  { arc:3, day:18, dayName:"Wed", month:"June", plat:"Instagram", fmt:"Rant reel · 45 sec",         time:"6:00 PM",  title:"Stop posting for the algorithm. This is the intervention.",    hook:"If one more brand changes their entire content strategy because of a platform update I will lose it. Here's why chasing algorithms is the number one mistake — and what we do instead.",                    hook2:"Save this and send to every brand manager you know. Brands that chase algorithms always lose to brands that chase their audience.",                                                                    tags:"#InstagramAlgorithm #ContentStrategy #Click8 #SocialMediaStrategy #BrandMarketing", goal:"Saves + followers — relatable pain point drives strong saves",          kpi:"3K saves · 3K new followers",   cta:"Save and tag a brand manager who needs this" },
-  { arc:3, day:19, dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Agency manifesto",            time:"10:00 AM", title:"The Click 8 anti-agency manifesto — our public promise",       hook:"We hate retainers that don't deliver. We hate decks stuffed with jargon. We hate agencies that hide behind 'brand awareness' when results don't come. Here's our public promise — in writing.",             hook2:"Every agency should publish one of these. Share if you think the industry needs more accountability. Screenshot and hold us to it.",                                                                   tags:"#AgencyAccountability #MarketingManifesto #Click8 #MarketingAgency #TransparentMarketing", goal:"Brand positioning + earned media — manifestos get reshared",          kpi:"25K impressions · 2K shares",   cta:"Share if you believe agencies should be accountable" },
-  { arc:3, day:20, dayName:"Fri", month:"June", plat:"Instagram", fmt:"Controversial reel · 60 sec", time:"9:00 AM", title:"Most influencer partnerships are a scam — the math",          hook:"Showing you the actual ROI math on a typical influencer deal right now. You're going to be furious when you see the numbers. Then I'll show you what actually works with real client data.",                 hook2:"Tag a brand that needs this reality check. The truth hurts but it's free. A bad influencer deal costs tens of thousands.",                                                                             tags:"#InfluencerMarketing #MarketingROI #Click8 #InfluencerStrategy #ContentMarketing", goal:"Viral reach + DMs from brands burned by bad deals",                       kpi:"2M reach · 1K saves",           cta:"DM 'INFLUENCER' if you've been burned by a bad deal" },
-  { arc:3, day:21, dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Deep dive breakdown",         time:"8:00 AM",  title:"We tested every viral marketing strategy so you don't have to", hook:"We tested 14 viral strategies from the internet's top gurus. On real clients. With real money. Honest scoreboard — 4 that worked, 7 that wasted everyone's time, 3 we're still testing.",                 hook2:"This post will save you thousands and months of wasted effort. Share with every marketing manager you know.",                                                                                          tags:"#MarketingStrategy #ViralMarketing #Click8 #ContentStrategy #MarketingExperiments", goal:"Authority + shares — being the most honest voice in the room",           kpi:"30K impressions · 3K shares",   cta:"Tag a marketer who needs this before they waste another budget" },
-  { arc:3, day:22, dayName:"Sun", month:"June", plat:"Instagram", fmt:"Storytelling reel · 60 sec", time:"7:00 PM",  title:"The brief that made us say no — a $250K decision",            hook:"A massive brand sent us a brief with 47 objectives, zero budget flexibility, and a two-week deadline. We said no. Here's the conversation and what it taught us about every client since.",                 hook2:"Every agency should watch this. Saying no to the wrong client is the most powerful growth strategy there is.",                                                                                        tags:"#AgencyLife #ClientManagement #Click8 #BrandConsulting #MarketingAgency",    goal:"Trust + community — attracts right-fit clients, repels wrong ones",         kpi:"500K views · 1K shares",        cta:"Share this with every agency founder you know" },
-
-  // WEEK 4 — CULTURAL TAKEOVER ARC
-  { arc:4, day:23, dayName:"Mon", month:"June", plat:"Instagram", fmt:"Collab reveal reel · 90 sec", time:"9:00 AM", title:"We partnered with [surprise creator] — watch",                hook:"We don't do paid promotions. We do creative partnerships where both sides genuinely believe in the output. This one broke every benchmark we had in 48 hours.",                                             hook2:"Tag someone who needs to see this collab. Watch until the very end — the last 10 seconds is the announcement you've been waiting for.",                                                               tags:"#CreativeCollab #ContentCreation #Click8 #BrandPartnership #InstagramMarketing", goal:"New audience + viral hype — tap into partner's community",               kpi:"5M reach · 10K new followers", cta:"Tag someone and watch until the end" },
-  { arc:4, day:23, dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Thought leadership post",     time:"2:00 PM",  title:"The next 3 years of marketing: 8 shifts that define everything", hook:"6 months studying market signals, cultural shifts, and platform data. Here are 8 things that will define marketing between now and 2028. Click 8 is already building for all of them.",                   hook2:"Save this. Screenshot it. It's your strategic planning document for the next 36 months. I'll write a deeper dive on each shift — follow for every installment.",                                     tags:"#MarketingFuture #ContentStrategy #Click8 #MarketingTrends2028 #FutureOfMarketing", goal:"Authority + media coverage — thought leadership at scale gets press",     kpi:"50K impressions · 5K saves",   cta:"Save and follow for the deeper dives on each shift" },
-  { arc:4, day:25, dayName:"Wed", month:"June", plat:"Instagram", fmt:"Community post · interactive", time:"6:00 PM", title:"You choose our next real client campaign",                   hook:"We're handing creative control to our community. Vote on the next campaign concept we build — this is for a real client, with a real budget. Your vote shapes what actually gets made.",                   hook2:"Drop your vote and watch us build it live. We'll give credit to everyone who voted for the winning concept. You're part of this.",                                                                    tags:"#CommunityMarketing #Click8 #ContentCreation #BrandStrategy #MarketingCommunity", goal:"Community ownership + engagement — revolutionary participation model",    kpi:"10K votes · 2K comments",      cta:"Vote for your preferred concept in the comments" },
-  { arc:4, day:26, dayName:"Thu", month:"June", plat:"LinkedIn", fmt:"Open letter / op-ed",         time:"10:00 AM", title:"An open letter to every brand that gave up on social media",   hook:"You didn't fail at social media. Social media failed you. You were handed the wrong playbook by people selling courses. Here's what the brands that actually win are doing differently.",                   hook2:"Every CMO needs to read this. Tag yours. Brands that treat social as conversation — not broadcasting — win every time.",                                                                              tags:"#SocialMediaStrategy #CMO #Click8 #BrandMarketing #ContentMarketing",        goal:"Viral share + inbound from burned brands",                                  kpi:"100K impressions · 10K shares", cta:"Tag your CMO — this conversation needs to happen" },
-  { arc:4, day:27, dayName:"Fri", month:"June", plat:"Instagram", fmt:"Milestone reveal reel · 60 sec", time:"9:00 AM", title:"We crossed a milestone — naming everyone who made it happen", hook:"The number matters less than the people. A personal shoutout to every client, collaborator, and community member. If you've ever engaged with Click 8, you're part of this milestone.",                 hook2:"Comment 'WE DID THIS' if you've been here from the start. Screenshot and share.",                                                                                                                     tags:"#Click8Milestone #Gratitude #MarketingCommunity #Click8 #BrandGrowth",       goal:"Loyalty + reach — milestone content creates emotional connection",          kpi:"10K comments · 1M reach",       cta:"Comment 'WE DID THIS' if you've been part of the journey" },
-  { arc:4, day:28, dayName:"Sat", month:"June", plat:"LinkedIn", fmt:"Vision + brand statement",    time:"8:00 AM",  title:"The agency we're building isn't for everyone. By design.",    hook:"We've been asked why we turn down clients, publish our frameworks, and share our failures. Simple: we're not building the biggest agency in the world. We're building the most trusted one.",               hook2:"The mission matters more than the metrics. Share if you believe purpose-driven business is the only business worth building.",                                                                         tags:"#PurposeDrivenBusiness #MarketingAgency #Click8 #AgencyValues #BrandPurpose", goal:"Brand vision + organic resharing from aligned audience",                   kpi:"30K impressions · 5K shares",  cta:"Share with someone building something they believe in" },
-  { arc:4, day:29, dayName:"Sun", month:"June", plat:"Instagram", fmt:"Challenge launch reel · 45 sec", time:"7:00 PM", title:"The #Click8Challenge — prove your brand in 8 seconds",     hook:"Can you communicate your entire brand value in 8 seconds? No editing. No voiceover. No script. Just the raw truth of what your brand stands for. We're going first — right now.",                         hook2:"Stitch us with your 8 seconds. We're reposting every single entry on our stories. Tag a brand that should try this.",                                                                                 tags:"#Click8Challenge #BrandChallenge #InstagramChallenge #ContentChallenge #BrandIdentity", goal:"UGC + viral brand challenge — exponential reach through participation", kpi:"100K stitches · 500 brand entries", cta:"Record your 8 seconds and stitch with #Click8Challenge" },
-  { arc:4, day:30, dayName:"Mon", month:"June", plat:"LinkedIn", fmt:"Month retrospective post",    time:"10:00 AM", title:"30 days of radical transparency — every number, published",   hook:"One month ago we committed to the most transparent content strategy any marketing agency has ever published. Today we're sharing every number — what performed, what flopped, what surprised us.",           hook2:"This is the post we'll look back on as the month that changed Click 8 forever. Save it. Follow for month 2 — it escalates from here.",                                                               tags:"#ContentMarketing #MarketingTransparency #Click8 #ContentCalendar #AgencyLife", goal:"Content series closer + month 2 launch momentum",                         kpi:"40K impressions · 3K saves",   cta:"Save and follow for month 2 — it escalates from here" },
+const C8_NAV = [
+  { label:"All arcs", icon:"◈", cls:"", count:"count-c8-0" },
+  { label:"Identity crisis", icon:"①", cls:"arc1", count:"count-c8-1" },
+  { label:"Proof machine",   icon:"②", cls:"arc2", count:"count-c8-2" },
+  { label:"Enemy arc",       icon:"③", cls:"arc3", count:"count-c8-3" },
+  { label:"Cultural takeover",icon:"④",cls:"arc4", count:"count-c8-4" },
 ];
 
-let activeArc = 0, showIG = true, showLI = true, selectedIdx = null, filteredCache = [];
+const C8_POSTS = [
+  { arc:1,day:2,dayName:"Mon",plat:"Instagram",fmt:"Carousel · 8 slides",time:"9:00 AM",title:"Your brand is lying to itself",hook:"If your logo is the first thing you think of when someone says 'brand', you've already lost. Here are 8 things your brand IS — none of them are a colour palette.",hook2:"Swipe through each identity layer. Save this before your next campaign brief. Most brands skip slide 6 — that's exactly why they're invisible.",tags:"#BrandStrategy #Click8 #MarketingTruth #BrandIdentity #DigitalMarketing",goal:"Saves + shares — position Click 8 as the brand that tells uncomfortable truths",kpi:"500+ saves · 200+ shares",cta:"Save this post + follow for weekly brand breakdowns"},
+  { arc:1,day:2,dayName:"Mon",plat:"LinkedIn",fmt:"Long-form post",time:"12:00 PM",title:"Why 97% of agency briefs fail before the client reads them",hook:"I've seen briefs from Fortune 500 companies and one-person brands. The problem is never the budget. Here's the 8-point brief framework we use at Click 8 that changes everything from day one.",hook2:"Drop a fire emoji if you want the framework as a free PDF. We'll send it to everyone who engages. This is what we usually charge for.",tags:"#MarketingAgency #BrandStrategy #ContentMarketing #Click8 #MarketingLeadership",goal:"Leads + authority — collect 200+ comments for DM follow-up",kpi:"200+ comments · 50+ DM leads",cta:"Comment your biggest brief challenge"},
+  { arc:1,day:4,dayName:"Wed",plat:"Instagram",fmt:"Reel · 60 seconds",time:"6:00 PM",title:"3 seconds to hook or die — we tested 200 reels",hook:"You have 0.3 seconds. Not 3. We tested 200 reels and tracked exactly which opening frame stopped the scroll every single time. The pattern shocked us.",hook2:"Comment 'HOOK' and we'll send you the full cheat sheet. We've used this to get clients to 1M+ reach on a single post. It's yours for free.",tags:"#InstagramReels #ContentStrategy #Click8 #ViralMarketing #SocialMediaTips",goal:"Reach + DMs — trigger 1000+ keyword comments for automation",kpi:"1M+ reach · 500+ comments",cta:"Comment 'HOOK' below"},
+  { arc:1,day:5,dayName:"Thu",plat:"LinkedIn",fmt:"Sunday letter",time:"10:00 AM",title:"What we learned from losing a pitch this week",hook:"We lost a pitch this week. We're sharing every detail — what we presented, where we went wrong, and the one question the client asked that we couldn't answer. Radical transparency.",hook2:"This industry needs more honesty. Share if you agree. The brands that win in 2025 are the ones brave enough to be human.",tags:"#AgencyLife #MarketingHonesty #Click8 #RadicalTransparency #GrowthMindset",goal:"Trust + virality — be the agency that's genuinely honest",kpi:"10K+ impressions · 300+ reactions",cta:"Share with someone who works in marketing"},
+  { arc:1,day:6,dayName:"Fri",plat:"Instagram",fmt:"Story series · 7 slides",time:"3:00 PM",title:"Day-in-the-life: Inside the Click 8 strategy room",hook:"Behind the curtain. What a real strategy session looks like — the whiteboards, the arguments, the breakthroughs, and the moments where we nearly gave up on an idea. No filters.",hook2:"Tap through to see how we build campaigns that break the internet. Stories expire in 24 hours — watch now.",tags:"#BehindTheScenes #MarketingAgency #Click8 #AgencyLife #ContentCreation",goal:"Authenticity + retention — 80% story completion rate",kpi:"80% completion · 200+ DM replies",cta:"DM 'STRATEGY' to join our next live session"},
+  { arc:1,day:7,dayName:"Sat",plat:"LinkedIn",fmt:"Poll + follow-up post",time:"9:00 AM",title:"What kills a brand faster? (24-hour poll)",hook:"I'm running a poll because I genuinely want to know what marketing professionals think. Our answer will surprise everyone who voted. Revealing in 24 hours.",hook2:"Results + our full breakdown drops tomorrow. Vote now and tag someone who works in brand strategy.",tags:"#BrandStrategy #MarketingPoll #Click8 #DigitalMarketing #BrandManagement",goal:"Engagement + reach — LinkedIn polls get 3x organic reach",kpi:"2K+ votes · 500+ comments",cta:"Vote and tag your marketing director"},
+  { arc:1,day:8,dayName:"Sun",plat:"Instagram",fmt:"Talking head reel · 45 sec",time:"9:00 AM",title:"I audited 100 brand pages in 24 hours — the pattern",hook:"I spent 24 hours auditing 100 brand pages on Instagram. 89 made the exact same mistake. Here's what separates the 11 that are actually growing.",hook2:"Follow for Part 2 dropping Tuesday. Comment your handle if you want to be audited live.",tags:"#InstagramMarketing #BrandAudit #Click8 #SocialMediaStrategy #BrandGrowth",goal:"Followers + views — Part 2 tease drives series engagement",kpi:"500K views · 2K new followers",cta:"Comment your Instagram handle for a live audit"},
+  { arc:2,day:9,dayName:"Mon",plat:"Instagram",fmt:"Before/After carousel · 10 slides",time:"9:00 AM",title:"0 to 80K followers. 90 days. Every move revealed.",hook:"Slide 1: the account before. Slides 2–9: the exact strategy, week by week. Slide 10: the final results. No gatekeeping. This is the full Click 8 playbook.",hook2:"Save this. Your future self will thank you. Exact posting cadence, content mix, and engagement tactics — no course needed.",tags:"#InstagramGrowth #SocialMediaMarketing #Click8 #ContentStrategy #FollowerGrowth",goal:"Saves + new followers — case study content converts followers to clients",kpi:"5K saves · 3K new followers",cta:"Save and DM 'GROWTH' for a free account audit"},
+  { arc:2,day:9,dayName:"Mon",plat:"LinkedIn",fmt:"Case study post",time:"12:00 PM",title:"How a D2C startup got 10x ROI in 6 months — full breakdown",hook:"Client name: confidential. Industry: direct-to-consumer. Budget: lean. Result: 10x return on every rupee. Full breakdown with screenshots and every strategy decision.",hook2:"DM 'case study' and we'll send you the full PDF. Only sending to the first 100 people who message.",tags:"#MarketingROI #CaseStudy #Click8 #D2CMarketing #DigitalStrategy",goal:"Leads + authority — case study PDF creates lead magnet pipeline",kpi:"500+ DMs · 50 qualified leads",cta:"DM 'case study' for the full PDF"},
+  { arc:2,day:11,dayName:"Wed",plat:"Instagram",fmt:"Talking head reel · 30 sec",time:"6:00 PM",title:"The metric everyone tracks that means nothing",hook:"Stop celebrating your follower count. I'll tell you the ONE number that actually predicts revenue — most brands have never checked it.",hook2:"Comment your follower count and engagement rate. We'll tell you what it means for your brand's revenue potential. Free. Right here.",tags:"#SocialMediaMetrics #InstagramTips #Click8 #MarketingMetrics #EngagementRate",goal:"Comments + reach — data collection + community engagement",kpi:"1K comments · 2M reach",cta:"Comment your follower count + engagement rate"},
+  { arc:2,day:12,dayName:"Thu",plat:"LinkedIn",fmt:"Controversial data post",time:"10:00 AM",title:"Most social media managers are paid to be average",hook:"Brands posting 7x/week with no strategy get 63% less engagement than brands posting 3x/week with a clear narrative arc. Yet most teams are measured on volume.",hook2:"Tag a marketing manager who needs to see this. What metric is YOUR team actually accountable for?",tags:"#SocialMediaManagement #ContentStrategy #Click8 #MarketingMetrics #CMO",goal:"Shares + debate — controversial take drives organic distribution",kpi:"5K shares · 1K comments",cta:"Tag a marketing manager below"},
+  { arc:2,day:13,dayName:"Fri",plat:"Instagram",fmt:"Results reveal reel · 45 sec",time:"9:00 AM",title:"Client said we were too expensive. We showed them this.",hook:"Three months ago a client almost didn't sign because of budget. We did a performance deal instead. Here's what happened — month by month, number by number.",hook2:"Never let price be the final answer when the ROI case is this clear. DM us to discuss a performance deal.",tags:"#ClientResults #MarketingROI #Click8 #AgencyResults #PerformanceMarketing",goal:"Social proof + inbound DMs from warm leads",kpi:"500K views · 200+ DM inquiries",cta:"DM 'PERFORMANCE' to discuss results-based engagement"},
+  { arc:2,day:14,dayName:"Sat",plat:"LinkedIn",fmt:"Data report long-form",time:"8:00 AM",title:"We analyzed 1,000 viral posts across 5 platforms",hook:"90 days. 1,000 posts. Every one tracked for format, time, hook type, CTA, and topic. The pattern contradicts everything every guru teaches.",hook2:"Save this post. The full report PDF goes to newsletter subscribers first.",tags:"#ContentMarketing #ViralContent #Click8 #SocialMediaData #ContentAnalysis",goal:"Newsletter subscribers + authority positioning",kpi:"2K saves · 500 newsletter signups",cta:"Drop 'REPORT' to get the full PDF in your DMs"},
+  { arc:2,day:15,dayName:"Sun",plat:"Instagram",fmt:"Screen recording reel · 60 sec",time:"7:00 PM",title:"Live analytics: real client dashboard, no hiding",hook:"Sharing my screen right now. Real client. Real numbers. Real growth. Breaking down what's working, what we're cutting, and what changed everything in month 2.",hook2:"Comment the metric you want us to focus on next. This series gets more specific every episode.",tags:"#MarketingAnalytics #DataDriven #Click8 #SocialMediaAnalytics #MarketingData",goal:"Trust + series engagement — raw authenticity builds credibility",kpi:"250K views · 500 comments",cta:"Comment the metric you want broken down next"},
+  { arc:3,day:16,dayName:"Mon",plat:"Instagram",fmt:"Expose carousel · 9 slides",time:"9:00 AM",title:"7 'marketing trends' secretly killing your brand",hook:"Everyone's doing these. Everyone's quietly losing because of them. We've watched 7 trends destroy brand equity for clients who came to us after trying them.",hook2:"Tag the agency or guru who sold you one of these. The marketing industry needs this conversation.",tags:"#MarketingMistakes #BrandStrategy #Click8 #MarketingTrends #BadMarketing",goal:"Shares + viral reach — controversy drives exponential distribution",kpi:"50K shares · 5M reach",cta:"Tag someone who needs to see this right now"},
+  { arc:3,day:16,dayName:"Mon",plat:"LinkedIn",fmt:"Hot take manifesto",time:"3:00 PM",title:"Vanity metrics are the cigarettes of marketing",hook:"No one talks about how addictive vanity metrics are. Likes. Followers. Impressions. They feel incredible. They're also quietly killing your brand.",hook2:"Drop the metric you've personally stopped reporting and why. I'll respond to every single comment.",tags:"#VanityMetrics #MarketingLeadership #Click8 #CMO #MarketingStrategy",goal:"Engagement + authority — Click 8 as the truth-telling agency",kpi:"1K comments · 20K impressions",cta:"Drop your honest answer in the comments"},
+  { arc:3,day:18,dayName:"Wed",plat:"Instagram",fmt:"Rant reel · 45 sec",time:"6:00 PM",title:"Stop posting for the algorithm. This is the intervention.",hook:"If one more brand changes their entire content strategy because of a platform update I will lose it. Here's why chasing algorithms is the number one mistake.",hook2:"Save this and send to every brand manager you know. Brands that chase algorithms always lose to brands that chase their audience.",tags:"#InstagramAlgorithm #ContentStrategy #Click8 #SocialMediaStrategy #BrandMarketing",goal:"Saves + followers — relatable pain point drives strong saves",kpi:"3K saves · 3K new followers",cta:"Save and tag a brand manager who needs this"},
+  { arc:3,day:19,dayName:"Thu",plat:"LinkedIn",fmt:"Agency manifesto",time:"10:00 AM",title:"The Click 8 anti-agency manifesto — our public promise",hook:"We hate retainers that don't deliver. We hate decks stuffed with jargon. We hate agencies that hide behind 'brand awareness' when results don't come.",hook2:"Every agency should publish one of these. Share if you think the industry needs more accountability.",tags:"#AgencyAccountability #MarketingManifesto #Click8 #MarketingAgency #TransparentMarketing",goal:"Brand positioning + earned media",kpi:"25K impressions · 2K shares",cta:"Share if you believe agencies should be accountable for results"},
+  { arc:3,day:20,dayName:"Fri",plat:"Instagram",fmt:"Controversial reel · 60 sec",time:"9:00 AM",title:"Most influencer partnerships are a scam — the math",hook:"Showing you the actual ROI math on a typical influencer deal right now. You're going to be furious. Then I'll show you what actually works.",hook2:"Tag a brand that needs this reality check. A bad influencer deal costs tens of thousands.",tags:"#InfluencerMarketing #MarketingROI #Click8 #InfluencerStrategy #ContentMarketing",goal:"Viral reach + DMs from brands burned by bad deals",kpi:"2M reach · 1K saves",cta:"DM 'INFLUENCER' if you've been burned by a bad deal"},
+  { arc:3,day:21,dayName:"Sat",plat:"LinkedIn",fmt:"Deep dive breakdown",time:"8:00 AM",title:"We tested every viral marketing strategy so you don't have to",hook:"14 strategies. Real clients. Real money. Honest scoreboard — 4 that worked, 7 that wasted everyone's time.",hook2:"This post will save you thousands and months of wasted effort. Share with every marketing manager you know.",tags:"#MarketingStrategy #ViralMarketing #Click8 #ContentStrategy #MarketingExperiments",goal:"Authority + shares — being the most honest voice in the room",kpi:"30K impressions · 3K shares",cta:"Tag a marketer who needs this before they waste another budget"},
+  { arc:3,day:22,dayName:"Sun",plat:"Instagram",fmt:"Storytelling reel · 60 sec",time:"7:00 PM",title:"The brief that made us say no — a $250K decision",hook:"A massive brand sent us a brief with 47 objectives, zero budget flexibility, and a two-week deadline. We said no. Here's what it taught us.",hook2:"Every agency should watch this. Saying no to the wrong client is the most powerful growth strategy.",tags:"#AgencyLife #ClientManagement #Click8 #BrandConsulting #MarketingAgency",goal:"Trust + community — attracts right-fit clients, repels wrong ones",kpi:"500K views · 1K shares",cta:"Share this with every agency founder you know"},
+  { arc:4,day:23,dayName:"Mon",plat:"Instagram",fmt:"Collab reveal reel · 90 sec",time:"9:00 AM",title:"We partnered with [surprise creator] — watch",hook:"We don't do paid promotions. We do creative partnerships where both sides genuinely believe in the output. This one broke every benchmark we had in 48 hours.",hook2:"Tag someone who needs to see this collab. Watch until the very end — the last 10 seconds is the announcement.",tags:"#CreativeCollab #ContentCreation #Click8 #BrandPartnership #InstagramMarketing",goal:"New audience + viral hype — tap into partner's community",kpi:"5M reach · 10K new followers",cta:"Tag someone and watch until the end"},
+  { arc:4,day:23,dayName:"Mon",plat:"LinkedIn",fmt:"Thought leadership post",time:"2:00 PM",title:"The next 3 years of marketing: 8 shifts that define everything",hook:"6 months studying market signals, cultural shifts, and platform data. Here are 8 things that will define marketing between now and 2028.",hook2:"Save this. Screenshot it. It's your strategic planning document for the next 36 months.",tags:"#MarketingFuture #ContentStrategy #Click8 #MarketingTrends2028 #FutureOfMarketing",goal:"Authority + media coverage — thought leadership at scale gets press",kpi:"50K impressions · 5K saves",cta:"Save and follow for the deeper dives on each shift"},
+  { arc:4,day:25,dayName:"Wed",plat:"Instagram",fmt:"Community post · interactive",time:"6:00 PM",title:"You choose our next real client campaign",hook:"We're handing creative control to our community. Vote on the next campaign concept — for a real client, with a real budget. Your vote shapes what actually gets made.",hook2:"Drop your vote and watch us build it live. We'll give credit to everyone who voted for the winning concept.",tags:"#CommunityMarketing #Click8 #ContentCreation #BrandStrategy #MarketingCommunity",goal:"Community ownership + engagement — revolutionary participation model",kpi:"10K votes · 2K comments",cta:"Vote for your preferred concept in the comments"},
+  { arc:4,day:26,dayName:"Thu",plat:"LinkedIn",fmt:"Open letter / op-ed",time:"10:00 AM",title:"An open letter to every brand that gave up on social media",hook:"You didn't fail at social media. Social media failed you. You were handed the wrong playbook by people selling courses.",hook2:"Every CMO needs to read this. Tag yours. Brands that treat social as conversation — not broadcasting — win every time.",tags:"#SocialMediaStrategy #CMO #Click8 #BrandMarketing #ContentMarketing",goal:"Viral share + inbound from burned brands",kpi:"100K impressions · 10K shares",cta:"Tag your CMO — this conversation needs to happen"},
+  { arc:4,day:27,dayName:"Fri",plat:"Instagram",fmt:"Milestone reveal reel · 60 sec",time:"9:00 AM",title:"We crossed a milestone — naming everyone who made it happen",hook:"The number matters less than the people. A personal shoutout to every client, collaborator, and community member who helped us get here.",hook2:"Comment 'WE DID THIS' if you've been here from the start. Screenshot and share.",tags:"#Click8Milestone #Gratitude #MarketingCommunity #Click8 #BrandGrowth",goal:"Loyalty + reach — milestone content creates emotional connection",kpi:"10K comments · 1M reach",cta:"Comment 'WE DID THIS' if you've been part of the journey"},
+  { arc:4,day:28,dayName:"Sat",plat:"LinkedIn",fmt:"Vision + brand statement",time:"8:00 AM",title:"The agency we're building isn't for everyone. By design.",hook:"We've been asked why we turn down clients, publish our frameworks, and share our failures. Simple: we're not building the biggest agency. We're building the most trusted one.",hook2:"The mission matters more than the metrics. Share if you believe purpose-driven business is the only business worth building.",tags:"#PurposeDrivenBusiness #MarketingAgency #Click8 #AgencyValues #BrandPurpose",goal:"Brand vision + organic resharing from aligned audience",kpi:"30K impressions · 5K shares",cta:"Share with someone building something they believe in"},
+  { arc:4,day:29,dayName:"Sun",plat:"Instagram",fmt:"Challenge launch reel · 45 sec",time:"7:00 PM",title:"The #Click8Challenge — prove your brand in 8 seconds",hook:"Can you communicate your entire brand value in 8 seconds? No editing. No voiceover. No script. Just the raw truth. We're going first — right now.",hook2:"Stitch us with your 8 seconds. We're reposting every single entry on our stories.",tags:"#Click8Challenge #BrandChallenge #InstagramChallenge #ContentChallenge #BrandIdentity",goal:"UGC + viral brand challenge — exponential reach through participation",kpi:"100K stitches · 500 brand entries",cta:"Record your 8 seconds and stitch with #Click8Challenge"},
+  { arc:4,day:30,dayName:"Mon",plat:"LinkedIn",fmt:"Month retrospective post",time:"10:00 AM",title:"30 days of radical transparency — every number, published",hook:"One month ago we committed to the most transparent content strategy any marketing agency has ever published. Today we share every number.",hook2:"This is the post we'll look back on as the month that changed Click 8 forever. Follow for month 2.",tags:"#ContentMarketing #MarketingTransparency #Click8 #ContentCalendar #AgencyLife",goal:"Content series closer + month 2 launch momentum",kpi:"40K impressions · 3K saves",cta:"Save and follow for month 2 — it escalates from here"},
+];
+
+/* ─────────────────────────────────────────
+   CAFÉ LA MIRAJH DATA
+───────────────────────────────────────── */
+const CAFE_ARCS = [
+  { num:"01–04", week:"June 2025 · All arcs", name:"Full month — Café La Mirajh campaign", desc:"Four arcs built to move Chennai customers from discovery to desire to loyalty — on Instagram organically and through precision Google Ads targeting." },
+  { num:"01", week:"Week 1 · June 2–8 · The Reveal", name:"The Reveal arc", desc:"Introduce Chennai to Café La Mirajh like it's the city's best-kept secret. Instagram creates FOMO; Google Ads captures everyone searching for cafés near them right now." },
+  { num:"02", week:"Week 2 · June 9–15 · Behind the Cup", name:"Behind the Cup arc", desc:"Pull back the curtain on craft, sourcing, and people. Instagram builds emotional depth; Google Ads retargets people who've shown interest but haven't visited yet." },
+  { num:"03", week:"Week 3 · June 16–22 · Community Love", name:"Community Love arc", desc:"Make your regulars famous and your neighbourhood proud. Instagram amplifies UGC; Google Ads pushes to weekend footfall with geo-targeted local campaigns." },
+  { num:"04", week:"Week 4 · June 23–30 · Signature Series", name:"Signature Series arc", desc:"Turn the menu into mythology and the café into a destination. Instagram launches signature items; Google Ads runs conversion campaigns targeting 'best café Chennai' searches." },
+];
+
+const CAFE_NAV = [
+  { label:"All arcs",        icon:"◈",  cls:"",         count:"count-cafe-0" },
+  { label:"The Reveal",      icon:"①",  cls:"cafe-arc1", count:"count-cafe-1" },
+  { label:"Behind the Cup",  icon:"②",  cls:"cafe-arc2", count:"count-cafe-2" },
+  { label:"Community Love",  icon:"③",  cls:"cafe-arc3", count:"count-cafe-3" },
+  { label:"Signature Series",icon:"④",  cls:"cafe-arc4", count:"count-cafe-4" },
+];
+
+const CAFE_POSTS = [
+  {arc:1,day:2,dayName:"Mon",plat:"Instagram",fmt:"Reel · 30 sec teaser",time:"7:00 PM",title:"Something's brewing in Chennai — and it isn't just coffee",hook:"No text. No logo. Just 30 seconds of the most beautiful café footage Chennai has seen. Steam rising off a cup, golden afternoon light, the clink of ceramics. End card: 'Café La Mirajh. Opening soon.'",hook2:"Comment 'WHERE' and we'll drop the location in your DMs before we announce it publicly. Be first.",tags:"#CafeChennai #ChennaiCafe #SomethingsBrewing #CafeLaMirajh #ChennaiFood",goal:"Pure curiosity — create FOMO before the announcement even lands",kpi:"200K+ views · 2K+ comments",cta:"Comment 'WHERE' to get the location first",gaspec:null},
+  {arc:1,day:2,dayName:"Mon",plat:"Google Ads",fmt:"Responsive Search Ad",time:"Launch Jun 2",title:"Best café Chennai — awareness search campaign",hook:"Headlines: 'Chennai's most beautiful café is here' / 'Café La Mirajh — now open in Chennai' / 'The café Chennai was waiting for'. Descriptions: 'Specialty coffee, intentional design, and the city's best cold brew.' / 'From Coorg beans to handcrafted cups — every detail made for Chennai.'",hook2:"Target keywords: 'best cafe chennai', 'new cafe chennai', 'specialty coffee chennai', 'cafe near me chennai'. Broad + phrase match. Bid: Maximise clicks.",tags:"Search · Awareness · Brand launch",goal:"Capture high-intent discovery searches the moment someone looks for a café",kpi:"CTR 8%+ · CPC under ₹12 · 5K impressions/day",cta:"Landing page: Google Maps listing + Instagram profile link",gaspec:"Campaign: Search · Budget: ₹500/day · Geo: Chennai 10km · Schedule: 7am–10pm daily"},
+  {arc:1,day:4,dayName:"Wed",plat:"Instagram",fmt:"Carousel · 7 slides",time:"9:00 AM",title:"7 things that make Café La Mirajh unlike anything in Chennai",hook:"We didn't build another café. We built the café Chennai was missing. Here are 7 things we've done differently — from bean sourcing to the way every corner is designed for how Chennaites actually live.",hook2:"Save this. Every slide is a reason to visit. Which one got you? Drop the number in the comments.",tags:"#BestCafeChennai #ChennaiCafes #CoffeeLover #CafeLaMirajh #ChennaiVibes",goal:"Saves + shares — discovery content that spreads organically across Chennai",kpi:"3K saves · 1K shares",cta:"Save and drop your slide number in the comments",gaspec:null},
+  {arc:1,day:5,dayName:"Thu",plat:"Google Ads",fmt:"Display Ad · 5 sizes",time:"Launch Jun 5",title:"Visual awareness display campaign — Chennai audiences",hook:"Creative: Warm terracotta and cream palette. Hero: close-up of a beautifully made cup on wood. Headline: 'Chennai's most intentional café.' Sub: 'Now open. Come as you are.' CTA: 'Find us'. Sizes: 728×90, 300×250, 160×600, 320×50, 300×600.",hook2:"Audience: In-market for restaurants + Coffee enthusiasts + Custom intent: 'cafe chennai' last 30 days. Frequency cap: 3 impressions/day per user.",tags:"Display · Awareness · Visual brand",goal:"Build visual brand recall across Chennai before people actively search",kpi:"500K impressions · 0.5%+ CTR · 60%+ viewable rate",cta:"Landing: Instagram @cafe_la_mirajh",gaspec:"Campaign: Display · Budget: ₹400/day · Geo: Chennai city · Audience: Coffee lovers + Restaurant explorers"},
+  {arc:1,day:6,dayName:"Fri",plat:"Instagram",fmt:"Story series · 5 slides",time:"12:00 PM",title:"First look inside Café La Mirajh — 24 hours only",hook:"Five raw, unedited story slides showing the space as it actually is. Slide 1: entrance. Slide 2: main seating. Slide 3: the bar. Slide 4: a detail shot. Slide 5: team setting up, backs to camera. Add a poll: 'Would you visit this week?'",hook2:"Stories live for 24 hours only. Screenshot your favourite slide and tag us — we're reposting every one.",tags:"#CafeLaMirajh #ChennaiCafe #FirstLook #CoffeeShop #Chennai",goal:"Story views + DM replies + screenshot UGC before doors open",kpi:"80% story completion · 300+ DM replies",cta:"Screenshot your favourite and tag @cafe_la_mirajh",gaspec:null},
+  {arc:1,day:7,dayName:"Sat",plat:"Instagram",fmt:"Reel · 60 sec walk-through",time:"6:00 PM",title:"Walk through Café La Mirajh before anyone else does",hook:"One continuous unedited walk-through of the entire space. No music, no cuts — just natural café sounds. POV camera, slow pace. The viewer feels like the first person through the door.",hook2:"We open on [date]. Comment 'FIRST' to join the queue for table one on opening day.",tags:"#CafeLaMirajh #CafeChennai #NewCafeAlert #ChennaiFood #CafeWalkthrough",goal:"Virality + opening day footfall drive",kpi:"500K views · 5K 'FIRST' comments",cta:"Comment 'FIRST' to be first through the door on opening day",gaspec:null},
+  {arc:1,day:8,dayName:"Sun",plat:"Google Ads",fmt:"YouTube Bumper · 6 sec",time:"Launch Jun 8",title:"Non-skippable 6-second brand bumper — YouTube Chennai",hook:"6 seconds, no skip. Shot: a perfect cup placed on a table in slow motion. 1 second of silence. Then text fades in: 'Café La Mirajh. Chennai.' No voiceover. No music. Just the cup and the city.",hook2:"Target: YouTube viewers in Chennai watching food, lifestyle, and coffee content. Run pre-roll on café, restaurant, food channels. Frequency: 2 bumpers per user/day.",tags:"YouTube · Bumper · Brand awareness",goal:"Burn the brand into memory in 6 seconds — reach people who'll never find Instagram",kpi:"1M impressions · 85%+ view rate · CPM under ₹60",cta:"End card: @cafe_la_mirajh on Instagram",gaspec:"Campaign: Video (bumper) · Budget: ₹600/day · Geo: Chennai · Audience: Food + lifestyle YouTube viewers"},
+  {arc:2,day:9,dayName:"Mon",plat:"Instagram",fmt:"Reel · 45 sec process video",time:"9:00 AM",title:"This is how your coffee is made at Café La Mirajh",hook:"Slow, unrushed, meditative. Real time — no speed-ups. Full process from grind to final pour. Natural sound only: the grinder, the tamp, the machine, the steam. End with the cup placed in front of camera.",hook2:"Every cup at La Mirajh takes exactly this long. We don't rush it. Tag someone who needs this kind of patience in their morning.",tags:"#CoffeeProcess #SpecialtyCoffee #CafeLaMirajh #CoffeeLovers #ChennaiCafe",goal:"Brand values + watch time — slow content builds the deepest fans",kpi:"300K views · 80% watch completion",cta:"Tag someone who deserves a slow, intentional morning",gaspec:null},
+  {arc:2,day:10,dayName:"Tue",plat:"Google Ads",fmt:"Remarketing Display",time:"Launch Jun 10",title:"Retargeting — people who saw us but haven't visited yet",hook:"Creative: Split image — empty café on the left, full of people on the right. Headline: 'You saw us. Come in.' Sub: 'Your first cup is waiting. Café La Mirajh, Chennai.' CTA: 'Get directions'. Three variations with different cups as hero.",hook2:"Audience: Instagram profile visitors + web visitors last 30 days + people who engaged with any post. Frequency: 5 impressions/day max. Exclude: past in-store visitors.",tags:"Display · Remarketing · Footfall",goal:"Convert warm audiences who've shown interest but haven't walked through the door",kpi:"40%+ footfall lift from retargeted audience · CTR 1.5%+",cta:"Landing: Google Maps with directions + click-to-call",gaspec:"Campaign: Display remarketing · Budget: ₹350/day · Audience: IG + web visitors · Geo: Chennai 5km from café"},
+  {arc:2,day:11,dayName:"Wed",plat:"Instagram",fmt:"Carousel · meet the team",time:"9:00 AM",title:"Meet the people behind every cup at Café La Mirajh",hook:"8 slides. 8 people. 8 sentences. Each team member shot against the same café background, holding their favourite menu item. Keep it personal and specific — no generic 'passionate about coffee' language.",hook2:"Which story moved you most? Drop the slide number. We'll feature the most-loved team member in our next story.",tags:"#CafeTeam #CafeLaMirajh #BaristaLife #ChennaiFood #PeopleOfChennai",goal:"Human connection — followers fall in love with the people, not just the place",kpi:"2K saves · 800 comments",cta:"Drop the slide number of the story that moved you most",gaspec:null},
+  {arc:2,day:12,dayName:"Thu",plat:"Google Ads",fmt:"Local Services Ad",time:"Launch Jun 12",title:"Google Local Services Ad — 'café near me' searches",hook:"Ad type: Local Services Ad (verified business badge). Services: 'Specialty coffee', 'All-day dining', 'Takeaway available', 'Dine-in seating'. Collect 10+ Google reviews before launch to display star rating. Phone number and hours visible.",hook2:"Keywords triggered: 'cafe near me', 'coffee shop near me', 'best cafe [area] chennai', 'cafe open now chennai'. These are the highest-intent local searches — the customer is ready to walk in.",tags:"Local Services · High intent · Walk-in",goal:"Capture maximum-intent 'near me' searches — convert directly to in-store visits",kpi:"200+ clicks/week · 50+ direction requests/day",cta:"Action: Get directions / Call now / Book a table",gaspec:"Campaign: Local Services Ad · Budget: ₹300/day · Geo: Chennai 3km radius · Trigger: 'cafe near me' keywords"},
+  {arc:2,day:13,dayName:"Fri",plat:"Instagram",fmt:"Reel · 30 sec ASMR",time:"6:00 PM",title:"The sounds of Café La Mirajh — no music, just the café",hook:"No background track. No voiceover. Pure café ASMR: espresso machine, ceramic clink, gentle murmur, rain on the window, the rustle of a newspaper. Slow montage of detail shots — condensation, steam, hands around a mug.",hook2:"Turn your sound up. Close your eyes. One word in the comments — what did that feel like?",tags:"#CafeASMR #CafeSounds #CafeLaMirajh #CoffeeVibes #ChennaiCafe",goal:"Emotion + virality — ASMR content generates outsized organic reach on Reels",kpi:"800K views · 3K one-word comments",cta:"Turn up your sound and drop one word in the comments",gaspec:null},
+  {arc:2,day:15,dayName:"Sun",plat:"Instagram",fmt:"Founder reel · 60 sec",time:"10:00 AM",title:"Why I opened Café La Mirajh — the honest version",hook:"Founder to camera, café visible behind them, natural light. No teleprompter — just talking. Cover: the moment they almost didn't do it, the visit to a café that changed their mind, what they want every customer to feel walking in.",hook2:"Not the polished version. The real one. Share with someone who's building something they believe in.",tags:"#ChennaiEntrepreneur #CafeLife #CafeLaMirajh #FounderStory #ChennaiFood",goal:"Founder brand + emotional depth — the post that makes Chennai root for the café",kpi:"600K views · 4K shares",cta:"Share with someone building something they believe in",gaspec:null},
+  {arc:3,day:16,dayName:"Mon",plat:"Instagram",fmt:"UGC compilation reel",time:"9:00 AM",title:"Chennai showed up. Every photo you posted from La Mirajh.",hook:"Compile every tagged visitor photo and video from the first two weeks into a 60-second reel. No professional shots — just real people, real moments. Set to the song the barista plays every morning. End: 'This café is yours, Chennai.'",hook2:"Tag yourself if you're in this reel. Tag a friend who needs to come. Comment your favourite shot.",tags:"#CafeLaMirajhCommunity #ChennaiCafe #CafeChennai #CommunityFirst #MyCafe",goal:"UGC amplification + community belonging + FOMO for non-visitors",kpi:"1M reach · 5K tags",cta:"Tag yourself or a friend and comment your favourite moment",gaspec:null},
+  {arc:3,day:17,dayName:"Tue",plat:"Google Ads",fmt:"Performance Max Campaign",time:"Launch Jun 17",title:"Performance Max — full-funnel conversion campaign",hook:"Asset groups: A (awareness) — café interior + 'Chennai's new favourite café'. B (consideration) — cup close-ups + 'Open daily from 7am'. C (conversion) — booking visual + 'Visit us today' + address. Upload 15 images, 5 videos (reuse best Reels), 5 headlines, 5 descriptions. Let Google optimise across Search, Display, YouTube, Maps, and Gmail.",hook2:"Audience signals: past visitors + Instagram engagers + custom intent 'cafe chennai'. Conversion goal: direction clicks + phone calls. Link to Google Business Profile.",tags:"Performance Max · Full funnel · Conversion",goal:"Let Google's AI find and convert the highest-value customers across every channel",kpi:"ROAS 4x+ · 100+ direction requests/day · CPA under ₹60",cta:"Conversion: Directions + Call + Maps visit",gaspec:"Campaign: Performance Max · Budget: ₹800/day · Geo: Chennai city · Goal: Store visits + calls"},
+  {arc:3,day:18,dayName:"Wed",plat:"Instagram",fmt:"Customer spotlight reel",time:"9:00 AM",title:"She's been here every morning this week. Here's why.",hook:"Interview a real regular at their usual table, in their usual light. Ask one question: 'Why do you keep coming back?' Use their exact words. Add their name and what they order. 45 seconds max.",hook2:"Every café dream is built for moments exactly like this. Who's your regular spot in Chennai? Tag them.",tags:"#CafeRegular #ChennaiCafe #CafeLaMirajh #CommunityStories #CoffeeLovers",goal:"Emotional storytelling — converts watchers into visitors and visitors into regulars",kpi:"600K views · 4K shares",cta:"Tag your go-to café person and tell them why they matter",gaspec:null},
+  {arc:3,day:20,dayName:"Fri",plat:"Instagram",fmt:"Local creator collab reel",time:"6:00 PM",title:"We invited Chennai's best food creator to spend a morning with us",hook:"Give a well-followed Chennai food creator complete creative freedom for one morning. No brief, no talking points. Just access to the space, team, and menu. Their raw take is more powerful than anything scripted.",hook2:"We didn't brief them. We gave them a table and a coffee. The result is the most honest portrait of La Mirajh we've seen.",tags:"#ChennaiFoodBlogger #ChennaiInfluencer #CafeLaMirajh #CafeChennai #FoodOfChennai",goal:"Creator audience crossover — reach Chennai food lovers who don't follow the café yet",kpi:"2M reach · 8K saves",cta:"Save this post and tag a food creator who needs to visit",gaspec:null},
+  {arc:3,day:21,dayName:"Sat",plat:"Google Ads",fmt:"Search · Weekend surge",time:"Launch Jun 21",title:"Weekend surge search campaign — Sat + Sun only",hook:"Schedule: Saturday and Sunday, 8am–2pm only. Headlines: 'Perfect Chennai weekend starts here' / 'Open now — Café La Mirajh' / 'Best brunch spot in Chennai this weekend'. Descriptions: 'Specialty coffee + all-day food. Your table is waiting.' Sitelinks: Menu / Location / Call / Weekend specials.",hook2:"Bid adjustment: +50% on weekends. Keywords: 'brunch chennai', 'cafe open saturday chennai', 'weekend cafe chennai', 'breakfast cafe chennai'. High bid on exact 'cafe near me' weekends.",tags:"Search · Weekend · Footfall drive",goal:"Dominate café search on Saturday and Sunday mornings",kpi:"300+ weekend clicks · 80+ direction requests · CTR 12%+",cta:"Landing: Google Maps with weekend hours prominent",gaspec:"Campaign: Search · Budget: ₹700/day weekends · Schedule: Sat–Sun 8am–2pm · Bid: +50% weekend"},
+  {arc:3,day:22,dayName:"Sun",plat:"Instagram",fmt:"Community challenge post",time:"12:00 PM",title:"Show us your La Mirajh moment — we'll put it on our wall",hook:"Announce the #MyMirajhMoment wall: real visitor photos going on the physical café wall, chosen by the community. Show the blank wall space and a mockup. Make the stakes real — this is permanent.",hook2:"Send your best photo to our DMs or tag #MyMirajhMoment. The 10 best go on the wall permanently. Every submission gets seen.",tags:"#MyMirajhMoment #CommunityWall #CafeLaMirajh #ChennaiCafe #CafePhotography",goal:"Massive UGC engine + permanent physical community touchpoint in the café",kpi:"1K submissions · 10K #MyMirajhMoment uses",cta:"DM your best photo or tag #MyMirajhMoment to be on the wall",gaspec:null},
+  {arc:4,day:23,dayName:"Mon",plat:"Instagram",fmt:"Signature drink reveal reel · 60 sec",time:"9:00 AM",title:"Introducing the Mirajh Cold Brew — only here, found nowhere else",hook:"12-hour brew. Single-origin Coorg beans. A process developed in-house over 4 months. Film the reveal cinematically — empty glass, then ice, then the slow pour, then the close-up. No talking. End: 'Mirajh Cold Brew. 30 servings. Daily.'",hook2:"We make 30 servings a day. That's it. Comment 'COLD BREW' and we'll tag you every morning when stock is nearly out.",tags:"#MirajhColdBrew #SignatureDrink #SpecialtyCoffee #CafeLaMirajh #CafeChennai",goal:"Scarcity-driven demand + daily comment automation engine",kpi:"700K views · 3K 'COLD BREW' comments daily",cta:"Comment 'COLD BREW' to be tagged before we run out every morning",gaspec:null},
+  {arc:4,day:24,dayName:"Tue",plat:"Google Ads",fmt:"Display · product focus",time:"Launch Jun 24",title:"Signature item display campaign — Mirajh Cold Brew",hook:"Creative: Full-bleed close-up of the Cold Brew on warm wood. Headline: 'Chennai's only Mirajh Cold Brew. 30 a day.' Sub: 'Single-origin Coorg. 12-hour brew. Get yours before it's gone.' CTA: 'Find Café La Mirajh.' Use scarcity hard — limited quantity drives urgency.",hook2:"Audience: Coffee enthusiasts + 'cold brew Chennai' searchers + Custom intent: specialty coffee. Retarget anyone who watched 50%+ of the Instagram Cold Brew reel. Run weekday mornings 7am–12pm only.",tags:"Display · Product · Scarcity",goal:"Drive footfall for the signature item — convert coffee-curious Chennaites into believers",kpi:"200K impressions/day · 2%+ CTR · 60+ attributed visits",cta:"Landing: Google Maps + directions to café",gaspec:"Campaign: Display · Budget: ₹400/day · Schedule: Mon–Fri 7am–12pm · Audience: Cold brew searchers"},
+  {arc:4,day:25,dayName:"Wed",plat:"Instagram",fmt:"Ritual reel · 45 sec",time:"6:00 PM",title:"The 7am ritual at Café La Mirajh — before the first customer arrives",hook:"Film the head barista's exact routine every morning before opening. No voiceover, no music — just the ritual and its sounds. The calibration, the temperature check, the first pull discarded, the tasting. Make it sacred.",hook2:"Some things are sacred. Watch this before your next coffee and tell us if it changes how it tastes.",tags:"#CoffeeRitual #MorningCoffee #CafeLaMirajh #BaristaCraft #CafeVibes",goal:"Brand mystique + ritual attachment — content that makes people feel chosen",kpi:"600K views · 5K saves",cta:"Save this and watch it before your next morning coffee",gaspec:null},
+  {arc:4,day:26,dayName:"Thu",plat:"Google Ads",fmt:"Responsive Search · conversion push",time:"Launch Jun 26",title:"End-of-month conversion search campaign",hook:"Headlines: 'Café La Mirajh — book your table' / 'Specialty coffee in Chennai — visit today' / 'Chennai's top-rated new café' / 'Single-origin coffee + all-day food' / 'Open from 7am — Café La Mirajh'. Descriptions: 'Join Chennai coffee lovers. Walk in daily or call to reserve.' / 'Award-worthy cold brew. The café your friends keep talking about.'",hook2:"Keywords: 'best cafe chennai 2025', 'specialty coffee chennai', 'cafe la mirajh', 'brunch spot chennai'. Bid: Target CPA ₹50. Extensions: Callout (Dine-in / Takeaway / Dog-friendly), Sitelinks, Call.",tags:"Search · Conversion · High intent",goal:"Close the month strong — capture everyone who's heard about the café but hasn't visited",kpi:"500 clicks · 200 direction requests · 50+ calls · CTR 10%+",cta:"Call now / Get directions / See menu",gaspec:"Campaign: Search · Budget: ₹600/day · Bid: Target CPA ₹50 · Extensions: Call + Sitelink + Callout"},
+  {arc:4,day:27,dayName:"Fri",plat:"Instagram",fmt:"Menu spotlight carousel · 8 slides",time:"9:00 AM",title:"The 8 things on our menu people come back for specifically",hook:"Ask real regulars: 'If we removed one thing, what would end you?' Compile the top 8 answers. Each slide: menu item photo + the exact words a real customer used. No marketing language — only real quotes. Slide 8: 'Tell us yours.'",hook2:"Which one would break your heart to lose? Drop the slide number. The top answer stays on the menu forever.",tags:"#CafeLaMirajhMenu #MustTry #CafeChennai #CoffeeAndFood #FoodOfChennai",goal:"Menu discovery + saves + repeat visit motivation — real quotes are the strongest social proof",kpi:"4K saves · 1K comments",cta:"Drop your slide number — the most-loved item stays forever",gaspec:null},
+  {arc:4,day:28,dayName:"Sat",plat:"Instagram",fmt:"Event announcement reel",time:"12:00 PM",title:"Chennai's first Slow Morning — 20 seats, no waitlist, be here",hook:"Film the announcement in the empty café on a Saturday morning. Founder to camera, natural light. Explain the concept: no phones, a curated set menu, a single playlist, strangers choosing to be present. Show 20 chairs being set up.",hook2:"20 seats. Every month. Comment 'SLOW' to be on the notification list for every future Slow Morning.",tags:"#SlowMorning #CafeLaMirajh #ChennaiEvents #DigitalDetox #CafeExperience",goal:"Event demand + community identity + recurring high-value visit habit",kpi:"300K views · 2K 'SLOW' comments · 20-seat sellout in 1 hour",cta:"Comment 'SLOW' to be first on every Slow Morning list",gaspec:null},
+  {arc:4,day:29,dayName:"Sun",plat:"Google Ads",fmt:"YouTube In-stream · 15 sec",time:"Launch Jun 29",title:"Skippable in-stream — month-end brand story close",hook:"15 seconds skippable. First 5 sec (non-skippable): Close-up of hands wrapping around a La Mirajh cup. Warm light. Silence. Then: café full of people — energy, laughter, conversation. Voice-over: 'Chennai found its café. Come find yours.' End card: Logo + 'Open daily from 7am' + Maps link.",hook2:"Target: YouTube viewers in Chennai who've previously seen our display or search ads (sequenced messaging). Also target: people who watched 50%+ of the Week 1 bumper. This is the close.",tags:"YouTube · In-stream · Brand close",goal:"Complete the brand story arc — the final emotional push to convert aware audiences",kpi:"800K impressions · 30%+ view-through rate · 150+ attributed visits",cta:"End card: Get directions on Google Maps",gaspec:"Campaign: Video in-stream · Budget: ₹700/day · Audience: Sequenced (saw bumper Week 1) · Geo: Chennai"},
+  {arc:4,day:30,dayName:"Mon",plat:"Instagram",fmt:"Month-end reflection reel · 60 sec",time:"10:00 AM",title:"June is done. Chennai, here's what you built with us.",hook:"A montage of the month: opening day, first regulars, team moments, the community wall going up, the cold brew sell-outs, the Slow Morning. No narration — just a title card at the end: 'Month one. Thank you, Chennai. Month two starts tomorrow.'",hook2:"This café belongs to this city. Save this. Share it. Month two starts tomorrow and it gets better.",tags:"#CafeLaMirajh #JuneWrap #ChennaiCafe #ThankYouChennai #MonthOne",goal:"Emotional close — cement loyalty and build anticipation for month two",kpi:"800K views · 6K shares",cta:"Share with everyone who said Chennai didn't have a great café",gaspec:null},
+];
+
+/* ─────────────────────────────────────────
+   STATE + LOGIC
+───────────────────────────────────────── */
+let currentClient = 'c8';
+let activeArc = 0;
+let showIG = true, showLI = true, showGA = true;
+let selectedIdx = null, filteredCache = [];
+
+function activeClass() { return currentClient === 'c8' ? 'active-c8' : 'active-cafe'; }
+
+function switchClient(client) {
+  currentClient = client;
+  activeArc = 0;
+  selectedIdx = null;
+  showIG = true; showLI = true; showGA = true;
+
+  document.getElementById('tab-c8').className  = 'client-tab' + (client === 'c8'   ? ' active-c8'   : '');
+  document.getElementById('tab-cafe').className = 'client-tab' + (client === 'cafe' ? ' active-cafe'  : '');
+
+  rebuildSidebar();
+  updateBanner();
+  closeDetail();
+  render();
+}
+
+function rebuildSidebar() {
+  const isCafe = currentClient === 'cafe';
+  const arcs   = isCafe ? CAFE_ARCS   : C8_ARCS;
+  const nav    = isCafe ? CAFE_NAV    : C8_NAV;
+  const posts  = isCafe ? CAFE_POSTS  : C8_POSTS;
+  const ac     = activeClass();
+
+  // Brand
+  document.getElementById('brand-logo').innerHTML =
+    `<span class="dot ${isCafe ? 'dot-brown' : 'dot-purple'}"></span>` +
+    (isCafe ? 'Café La Mirajh' : 'Click 8');
+  document.getElementById('brand-sub').textContent =
+    isCafe ? 'June 2025 · IG + Google Ads' : 'June 2025 · Content Calendar';
+
+  // Topbar sub
+  document.getElementById('topbar-sub').textContent =
+    isCafe ? 'Instagram + Google Ads · 4 campaign arcs · 30 days'
+           : 'Instagram + LinkedIn · 4 narrative arcs · 30 days';
+  document.getElementById('plat-pill').innerHTML =
+    `<strong>${isCafe ? '2' : '2'}</strong> platforms`;
+
+  // Nav
+  const sec = document.getElementById('sidebar-section');
+  sec.innerHTML = '<div class="sidebar-label">Campaign arcs</div>';
+  nav.forEach((n, i) => {
+    const count = posts.filter(p => i === 0 || p.arc === i).length;
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn' + (i === activeArc ? ` active ${ac}` : '');
+    btn.id = `nav-${i}`;
+    btn.onclick = () => setArc(i, btn);
+    btn.innerHTML = `<span class="nav-icon ${n.cls}">${n.icon}</span>${n.label}<span class="nav-count" id="count-nav-${i}">${count}</span>`;
+    sec.appendChild(btn);
+  });
+
+  // Platform toggles
+  const pts = document.getElementById('plat-toggle-section');
+  pts.innerHTML = '<div class="sidebar-label" style="padding:0;margin-bottom:10px">Platforms</div>';
+
+  const igBtn = document.createElement('button');
+  igBtn.className = 'plat-btn ig-on'; igBtn.id = 'btn-ig';
+  igBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram<span class="toggle-dot"></span>`;
+  igBtn.onclick = () => togglePlat('ig');
+  pts.appendChild(igBtn);
+
+  if (isCafe) {
+    const gaBtn = document.createElement('button');
+    gaBtn.className = 'plat-btn ga-on'; gaBtn.id = 'btn-ga';
+    gaBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/><line x1="3" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/></svg>Google Ads<span class="toggle-dot"></span>`;
+    gaBtn.onclick = () => togglePlat('ga');
+    pts.appendChild(gaBtn);
+  } else {
+    const liBtn = document.createElement('button');
+    liBtn.className = 'plat-btn li-on'; liBtn.id = 'btn-li';
+    liBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5" stroke-linecap="round"/><path d="M11 17v-4c0-1.5 1-2.5 2.5-2.5S16 11.5 16 13v4"/></svg>LinkedIn<span class="toggle-dot"></span>`;
+    liBtn.onclick = () => togglePlat('li');
+    pts.appendChild(liBtn);
+  }
+}
 
 function setArc(n, btn) {
   activeArc = n;
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const d = ARCS[n];
-  document.getElementById('arc-num').textContent = d.num;
-  document.getElementById('arc-week').textContent = d.week;
-  document.getElementById('arc-name').textContent = d.name;
-  document.getElementById('arc-desc').textContent = d.desc;
-  document.getElementById('topbar-title').textContent = n === 0 ? 'June 2025 — Full Campaign' : d.name;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active', 'active-c8', 'active-cafe'));
+  btn.classList.add('active', activeClass());
+  updateBanner();
   selectedIdx = null;
   closeDetail();
   render();
 }
 
+function updateBanner() {
+  const isCafe = currentClient === 'cafe';
+  const arcs   = isCafe ? CAFE_ARCS : C8_ARCS;
+  const d = arcs[activeArc];
+  const numEl  = document.getElementById('arc-num');
+  const weekEl = document.getElementById('arc-week');
+  numEl.className  = 'arc-number ' + (isCafe ? 'cafe' : 'c8');
+  weekEl.className = 'arc-week-label ' + (isCafe ? 'cafe' : 'c8');
+  numEl.textContent  = d.num;
+  weekEl.textContent = d.week;
+  document.getElementById('arc-name').textContent = d.name;
+  document.getElementById('arc-desc').textContent = d.desc;
+  document.getElementById('topbar-title').textContent =
+    activeArc === 0 ? (isCafe ? 'Café La Mirajh — June 2025' : 'June 2025 — Full Campaign') : d.name;
+}
+
 function togglePlat(p) {
+  const isCafe = currentClient === 'cafe';
   if (p === 'ig') {
-    if (showIG && !showLI) return;
+    const other = isCafe ? showGA : showLI;
+    if (showIG && !other) return;
     showIG = !showIG;
     document.getElementById('btn-ig').classList.toggle('ig-on', showIG);
-  } else {
+  } else if (p === 'li') {
     if (!showIG && showLI) return;
     showLI = !showLI;
     document.getElementById('btn-li').classList.toggle('li-on', showLI);
+  } else if (p === 'ga') {
+    if (!showIG && showGA) return;
+    showGA = !showGA;
+    document.getElementById('btn-ga').classList.toggle('ga-on', showGA);
   }
   selectedIdx = null;
   closeDetail();
@@ -824,11 +879,16 @@ function togglePlat(p) {
 }
 
 function render() {
-  const grid = document.getElementById('grid');
-  filteredCache = POSTS.filter(p => {
+  const isCafe = currentClient === 'cafe';
+  const posts  = isCafe ? CAFE_POSTS : C8_POSTS;
+  const grid   = document.getElementById('grid');
+  const selClass = isCafe ? 'selected-cafe' : 'selected-c8';
+
+  filteredCache = posts.filter(p => {
     if (activeArc > 0 && p.arc !== activeArc) return false;
     if (!showIG && p.plat === 'Instagram') return false;
     if (!showLI && p.plat === 'LinkedIn') return false;
+    if (!showGA && p.plat === 'Google Ads') return false;
     return true;
   });
 
@@ -841,60 +901,81 @@ function render() {
 
   grid.innerHTML = filteredCache.map((p, i) => {
     const isIG = p.plat === 'Instagram';
-    const delay = Math.min(i * 30, 300);
-    return `<div class="card${selectedIdx === i ? ' selected' : ''}" id="card-${i}" onclick="showDetail(${i})" style="animation-delay:${delay}ms">
-      <div class="card-accent ${isIG ? 'ig-accent' : 'li-accent'}"></div>
+    const isGA = p.plat === 'Google Ads';
+    const badgeCls = isIG ? 'ig-badge' : isGA ? 'ga-badge' : 'li-badge';
+    const accentCls= isIG ? 'ig-accent': isGA ? 'ga-accent': 'li-accent';
+    const icon     = isIG ? IG_SVG : isGA ? GA_SVG : LI_SVG;
+    const delay = Math.min(i * 28, 280);
+    return `<div class="card${selectedIdx === i ? ' ' + selClass : ''}" id="card-${i}" onclick="showDetail(${i})" style="animation-delay:${delay}ms">
+      <div class="card-accent ${accentCls}"></div>
       <div class="card-body">
         <div class="card-meta">
-          <span class="plat-badge ${isIG ? 'ig-badge' : 'li-badge'}">${isIG ? IG_SVG : LI_SVG} ${p.plat}</span>
+          <span class="plat-badge ${badgeCls}">${icon}${p.plat}</span>
           <span class="day-badge">June ${p.day}</span>
         </div>
         <div class="card-title">${p.title}</div>
         <div class="card-fmt">${p.fmt}</div>
         <div class="card-time">⏰ ${p.time}</div>
       </div>
-      <div class="card-footer">
-        <span style="opacity:.5">↗</span>
-        <span class="card-kpi">${p.kpi}</span>
-      </div>
+      <div class="card-footer"><span style="opacity:.5">↗</span><span class="card-kpi">${p.kpi}</span></div>
     </div>`;
   }).join('');
 }
 
 function showDetail(i) {
   selectedIdx = i;
-  document.querySelectorAll('.card').forEach((c, idx) => c.classList.toggle('selected', idx === i));
+  const isCafe = currentClient === 'cafe';
+  const selClass = isCafe ? 'selected-cafe' : 'selected-c8';
+  document.querySelectorAll('.card').forEach((c, idx) => {
+    c.classList.remove('selected-c8', 'selected-cafe');
+    if (idx === i) c.classList.add(selClass);
+  });
+
   const p = filteredCache[i];
   const isIG = p.plat === 'Instagram';
+  const isGA = p.plat === 'Google Ads';
+  const badgeCls = isIG ? 'ig-badge' : isGA ? 'ga-badge' : 'li-badge';
+  const icon     = isIG ? IG_SVG : isGA ? GA_SVG : LI_SVG;
+  const hookCls  = isCafe ? 'hook-box cafe-hook' : 'hook-box';
+  const arrowCls = isCafe ? 'cta-arrow cafe' : 'cta-arrow';
+
+  const gaSpecBlock = (p.gaspec)
+    ? `<div class="section-label">Google Ads spec</div><div class="ga-spec-box">${p.gaspec}</div>`
+    : '';
+
+  const clientLabel = isCafe ? 'Café La Mirajh' : 'Click 8';
+
   const detWrap = document.getElementById('detail-wrap');
-  const det = document.getElementById('detail');
+  const det     = document.getElementById('detail');
   detWrap.classList.add('visible');
+
   det.innerHTML = `<div class="detail">
     <div class="detail-header">
       <div>
-        <span class="detail-plat-badge ${isIG ? 'ig-badge' : 'li-badge'}">${isIG ? IG_SVG : LI_SVG} ${p.plat} · ${p.fmt}</span>
+        <span class="detail-plat-badge ${badgeCls}">${icon}${p.plat} · ${p.fmt}</span>
         <div class="detail-title">${p.title}</div>
       </div>
       <button class="close-btn" onclick="closeDetail()" aria-label="Close">✕</button>
     </div>
     <div class="detail-grid">
       <div class="detail-cell"><div class="detail-cell-label">Date</div><div class="detail-cell-val">${p.dayName}, June ${p.day}, 2025</div></div>
-      <div class="detail-cell"><div class="detail-cell-label">Post time</div><div class="detail-cell-val">${p.time}</div></div>
+      <div class="detail-cell"><div class="detail-cell-label">${isGA ? 'Launch date' : 'Post time'}</div><div class="detail-cell-val">${p.time}</div></div>
       <div class="detail-cell"><div class="detail-cell-label">Primary goal</div><div class="detail-cell-val">${p.goal}</div></div>
       <div class="detail-cell"><div class="detail-cell-label">KPI target</div><div class="detail-cell-val">${p.kpi}</div></div>
     </div>
     <div class="detail-body">
-      <div class="section-label">Hook direction</div>
-      <div class="hook-box">${p.hook}</div>
-      <div class="section-label">Caption</div>
+      <div class="section-label">${isGA ? 'Ad creative direction' : 'Hook direction'}</div>
+      <div class="${hookCls}">${p.hook}</div>
+      <div class="section-label">${isGA ? 'Targeting + setup notes' : 'Caption'}</div>
       <div class="text-box">${p.hook2}</div>
-      <div class="section-label">Hashtags</div>
+      ${gaSpecBlock}
+      <div class="section-label">${isGA ? 'Campaign type + audience' : 'Hashtags'}</div>
       <div class="tags-box">${p.tags}</div>
       <div class="section-label">Call to action</div>
-      <div class="cta-box"><span class="cta-arrow">→</span>${p.cta}</div>
+      <div class="cta-box"><span class="${arrowCls}">→</span>${p.cta}</div>
       <div class="action-row">
         <button class="action-btn" onclick="copyPost(${i})">⎘ Copy brief</button>
-        <button class="action-btn" onclick="exportPost(${i})">↓ Export as text</button>
+        <button class="action-btn" onclick="exportPost(${i})">↓ Export as .txt</button>
       </div>
     </div>
   </div>`;
@@ -903,52 +984,42 @@ function showDetail(i) {
 
 function closeDetail() {
   selectedIdx = null;
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-  const dw = document.getElementById('detail-wrap');
-  dw.classList.remove('visible');
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected-c8', 'selected-cafe'));
+  document.getElementById('detail-wrap').classList.remove('visible');
 }
 
 function copyPost(i) {
   const p = filteredCache[i];
-  const text = `CLICK 8 — CONTENT BRIEF
-Platform: ${p.plat}
-Date: ${p.dayName}, June ${p.day}, 2025
-Time: ${p.time}
-Format: ${p.fmt}
-
-TITLE: ${p.title}
-
-HOOK:
-${p.hook}
-
-CAPTION:
-${p.hook2}
-
-HASHTAGS:
-${p.tags}
-
-GOAL: ${p.goal}
-KPI: ${p.kpi}
-CTA: ${p.cta}`;
+  const isCafe = currentClient === 'cafe';
+  const clientLabel = isCafe ? 'CAFÉ LA MIRAJH' : 'CLICK 8';
+  const gaLine = p.gaspec ? `\nGOOGLE ADS SPEC:\n${p.gaspec}\n` : '';
+  const text = `${clientLabel} — CONTENT BRIEF\nPlatform: ${p.plat}\nDate: ${p.dayName}, June ${p.day}, 2025\nTime: ${p.time}\nFormat: ${p.fmt}\n\nTITLE: ${p.title}\n\nHOOK / CREATIVE DIRECTION:\n${p.hook}\n\nCAPTION / SETUP NOTES:\n${p.hook2}\n${gaLine}\nHASHTAGS / TARGETING:\n${p.tags}\n\nGOAL: ${p.goal}\nKPI: ${p.kpi}\nCTA: ${p.cta}`;
   navigator.clipboard.writeText(text).then(() => {
     const btn = event.target;
+    const orig = btn.textContent;
     btn.textContent = '✓ Copied!';
-    setTimeout(() => { btn.textContent = '⎘ Copy brief'; }, 2000);
+    setTimeout(() => { btn.textContent = orig; }, 2000);
   });
 }
 
 function exportPost(i) {
   const p = filteredCache[i];
-  const text = `CLICK 8 — CONTENT BRIEF\n\nPlatform: ${p.plat}\nDate: ${p.dayName}, June ${p.day}, 2025\nTime: ${p.time}\nFormat: ${p.fmt}\n\nTITLE: ${p.title}\n\nHOOK:\n${p.hook}\n\nCAPTION:\n${p.hook2}\n\nHASHTAGS:\n${p.tags}\n\nGOAL: ${p.goal}\nKPI: ${p.kpi}\nCTA: ${p.cta}`;
+  const isCafe = currentClient === 'cafe';
+  const clientLabel = isCafe ? 'CAFÉ LA MIRAJH' : 'CLICK 8';
+  const gaLine = p.gaspec ? `\nGOOGLE ADS SPEC:\n${p.gaspec}\n` : '';
+  const text = `${clientLabel} — CONTENT BRIEF\nPlatform: ${p.plat}\nDate: ${p.dayName}, June ${p.day}, 2025\nTime: ${p.time}\nFormat: ${p.fmt}\n\nTITLE: ${p.title}\n\nHOOK / CREATIVE DIRECTION:\n${p.hook}\n\nCAPTION / SETUP NOTES:\n${p.hook2}\n${gaLine}\nHASHTAGS / TARGETING:\n${p.tags}\n\nGOAL: ${p.goal}\nKPI: ${p.kpi}\nCTA: ${p.cta}`;
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `Click8_June${p.day}_${p.plat}.txt`;
+  a.download = `${isCafe ? 'CafeLaMirajh' : 'Click8'}_June${p.day}_${p.plat.replace(' ','')}.txt`;
   a.click();
   URL.revokeObjectURL(url);
 }
 
+// Init
+rebuildSidebar();
+updateBanner();
 render();
 </script>
 </body>
